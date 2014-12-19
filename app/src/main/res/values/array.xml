@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mjesta">
+        <item>Zagreb</item>
+        <item>Split</item>
+        <item>Rijeka</item>
+    </string-array>
+
+    <!--ime <tab> imeSlike <tab> opis <tab> link-->
+    <string-array name="menzeZagreb">
+        <item>Fer Cassandra\tfer\tsc_savska_html\t</item>
+        <item>Savska\tsc_savska\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/savska/</item>
+        <item>SD S.Radić\tstjepanradic\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-s-radic/</item>
+        <item>SD Cvjetno Naselje\tcvjetno\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-cvjetno-naselje/</item>
+        <item>SD Lašćina\tlascina\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-lascina/</item>
+        <item>ZUK Borongaj\tborongaj\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/zuk-borongaj/</item>
+        <item>Ekonomija\tekonomija\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/ekonomija/</item>
+        <item>Medicina\tmedicina\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/medicina/</item>
+        <item>Veterina\tveterina\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/veterina/</item>
+        <item>Šumarstvo\tsumarstvo\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sumarstvo/</item>
+        <item>FSB\tfsb\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/fsb/</item>
+        <item>ALU\talu\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/alu/</item>
+        <item>Blagavaona TTF\tttf\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/blagovaona-ttf/</item>
+    </string-array>
+
+    <string-array name="menzeSplit">
+        <item>SD HOSTEL SPINUT\tst_spinut</item>
+        <item>SD Bruno Bušić\tst_brunobusic</item>
+        <item>FGAG\tst_gradjevina</item>
+        <item>Ekonomija\tst_ekonomija</item>
+        <item>FESB 2\tst_fsb</item>
+        <item>Medicina\tst_medicina</item>
+        <item>PMF\tst_pmf</item>
+        <item>Pravo\tst_pravo</item>
+        <item>Filozofski\tst_filozofija</item>
+        <item>Snack bar\tst_knjiznica</item>
+    </string-array>
+
+    <string-array name="menzeRijeka">
+        <item>Indeks\tri_index</item>
+        <item>Mini\tri_mini</item>
+        <item>Caffe bar Medicinar\tri_medicina</item>
+        <item>Kampus\tri_kampus</item>
+        <item>Caffe bar Reful\tri_reful</item>
+        <item>Caffe bar Andrea\tri_andrea</item>
+        <item>Caffe bar Formula\tri_formula</item>
+        <item>Bistro Mul\tri_ika</item>
+    </string-array>
+
+    <array name="menze">
+        <item>@array/menzeZagreb</item>
+        <item>@array/menzeSplit</item>
+        <item>@array/menzeRijeka</item>
+    </array>
+
+    <string-array name="sc_savska_html">
+        <item>
+            Radno vrijeme restorana:
+        </item>
+        <item>
+            \tlinija lijevo:
+        </item>
+        <item>
+            \t\t&#8226; ručak 10:00 – 16:00
+        </item>
+        <item>
+            \t\t&#8226; večera 17:30 – 20:30
+        </item>
+        <item>
+            \tlinija desno:
+        </item>
+        <item>
+            \t\t&#8226; ručak 11:30 – 16:00
+        </item>
+        <item>
+            \t&#8226; subotom i nedjeljom ne radi
+        </item>
+        <item>
+            Radno vrijeme Express restorana
+        </item>
+        <item>
+            \t&#8226; 9:00 – 15:00
+        </item>
+        <item>
+            \t&#8226; petkom 16:00- 21:00
+        </item>
+        <item>
+           \t&#8226; subotom 9:00 – 21:00
+        </item>
+        <item>
+            \t&#8226; nedjeljom ne radi
+        </item>
+
+    </string-array>
+
+</resources>
