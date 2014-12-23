@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 /**
  * Created by Azzaro on 17.12.2014..
@@ -23,8 +24,11 @@ public class MjestoPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        if(position == 0){
+            return new SaldoFragment();
+        }
         Bundle bundle = new Bundle();
-        bundle.putInt(MjestoFragment.ID_MJESTA, position);
+        bundle.putInt(MjestoFragment.ID_MJESTA, position - 1);
         MjestoFragment mjestoFragment = new MjestoFragment();
         mjestoFragment.setArguments(bundle);
 
@@ -33,6 +37,6 @@ public class MjestoPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return mjesta.length;
+        return mjesta.length + 1;
     }
 }
