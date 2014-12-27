@@ -6,11 +6,34 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
 
+
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TEST"
+        android:layout_height="wrap_content"
+        android:text="Upisi broj xice"
         android:textSize="40sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editText" />
+
+    <Button
+        android:id="@+id/provjeriButton"
+        android:text="SUbmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/prikazIznosa"
+        android:text="TEST"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

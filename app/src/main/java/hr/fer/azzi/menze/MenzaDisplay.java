@@ -17,6 +17,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,7 +32,6 @@ public class MenzaDisplay extends Activity {
     ImageView image;
     ExpandableListView description;
     Menza menza;
-    ArrayAdapter<String> arrayAdapter;
 
     ExpandableListAdapter listAdapter;
     HashMap<String, List<String>> listDataChild;
@@ -58,65 +58,26 @@ public class MenzaDisplay extends Activity {
         }
 
 
-        //listDataHeader.add("Radno vrijeme");
+        listDataHeader.add("Radno vrijeme");
 
-        //listDataChild = new HashMap<>();
-        //listDataChild.put(listDataHeader.get(0),listaOpisa);
-
-        prepareListData();
+        listDataChild = new HashMap<>();
+        listDataChild.put(listDataHeader.get(0),listaOpisa);
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         description.setAdapter(listAdapter);
 
-        //arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaOpisa);
-       // description.setAdapter(arrayAdapter);
 
         if(menza.getLink() != null){
-            //new HtmlGetParser().execute(menza.getLink());
+            new HtmlGetParser().execute(menza.getLink());
         }
 
     }
 
-    private void prepareListData() {
+
+    private void setViews() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-        // Adding child data
-        listDataHeader.add("Top 250");
-        listDataHeader.add("Now Showing");
-        listDataHeader.add("Coming Soon..");
-
-        // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
-
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
-
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
-
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
-    }
-
-    private void setViews() {
         title = (TextView) findViewById(R.id.title);
         image = (ImageView) findViewById(R.id.image);
         description = (ExpandableListView) findViewById(R.id.description);
@@ -160,9 +121,8 @@ public class MenzaDisplay extends Activity {
 
         @Override
         protected void onPostExecute(List<String> lineList) {
-            for (String line: lineList){
-                arrayAdapter.add(line);
-            }
+            Date date = new Date();
+            listAdapter.addElement("Meni " + date.toString(), lineList);
         }
     }
 }

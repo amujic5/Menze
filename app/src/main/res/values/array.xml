@@ -55,7 +55,7 @@
 
     <string-array name="sc_savska_html">
         <item>
-            1. Radno vrijeme restorana:
+            1. Restoran:
         </item>
         <item>
             \tlinija lijevo:
@@ -76,7 +76,7 @@
             \t&#8226; subotom i nedjeljom ne radi
         </item>
         <item>
-           2. Radno vrijeme Express restorana
+           2. Express restoran
         </item>
         <item>
             \t&#8226; 9:00 – 15:00
@@ -95,7 +95,7 @@
 
     <string-array name="hotel_spinut_html">
         <item>
-            1. Radno vrijeme restorana
+            1. Restoran
         </item>
         <item>
             \t&#8226; ručak  12.00 – 15.00
@@ -104,7 +104,7 @@
             \t&#8226; večera 18.00 – 21.00
         </item>
         <item>
-            2. Radno vrijeme kafića
+            2. Kafić
         </item>
         <item>
             \t&#8226; 07.30 – 21.00
@@ -114,17 +114,14 @@
 
     <string-array name="bruno_basic_html">
         <item>
-            Radno vrijeme
-        </item>
-        <item>
-            \t&#8226;06.30 – 19.00
+            &#8226; 06.30 – 19.00
         </item>
 
     </string-array>
 
     <string-array name="gaa_html">
         <item>
-            1. Radno vrijeme restorana
+            1. Restoran
         </item>
         <item>
             \t&#8226; ručak  12.00 – 15.00
@@ -133,7 +130,7 @@
             \t&#8226; večera 18.00 – 21.00
         </item>
         <item>
-            2. Radno vrijeme kafića
+            2. Kafić
         </item>
         <item>
             \t&#8226; 07.30 – 20.00
@@ -143,13 +140,13 @@
 
     <string-array name="ekonomija_html">
         <item>
-            1. Radno vrijeme restorana
+            1. Restoran
         </item>
         <item>
             \t&#8226;  12.00 – 19.30
         </item>
         <item>
-            2. Radno vrijeme kafića
+            2. Kafić
         </item>
         <item>
             \t&#8226; 07.30 – 20.00
@@ -159,7 +156,7 @@
 
     <string-array name="fesb_html">
         <item>
-            Radno vrijeme restorana
+            Restoran
         </item>
         <item>
             \t&#8226;  07.30 – 19.30
@@ -172,44 +169,29 @@
 
     <string-array name="medicina_html">
         <item>
-            Radno vrijeme
-        </item>
-        <item>
-            \t&#8226;  07.30 – 16.00
+            &#8226;  07.30 – 16.00
         </item>
     </string-array>
 
     <string-array name="pmf_html">
         <item>
-            Radno vrijeme
-        </item>
-        <item>
-            \t&#8226;  07.00 – 16.00
+            &#8226;  07.00 – 16.00
         </item>
     </string-array>
 
     <string-array name="pravo_html">
         <item>
-            Radno vrijeme
-        </item>
-        <item>
-            \t&#8226;  07.00 – 16.00
+            &#8226;  07.00 – 16.00
         </item>
     </string-array>
     <string-array name="filozofija_html">
         <item>
-            Radno vrijeme
-        </item>
-        <item>
-            \t&#8226;  07.00 – 16.00
+            &#8226;  07.00 – 16.00
         </item>
     </string-array>
     <string-array name="snack_html">
         <item>
-            Radno vrijeme
-        </item>
-        <item>
-            \t&#8226;  07.30 – 19.00
+            &#8226;  07.30 – 19.00
         </item>
     </string-array>
 </resources>

@@ -5,7 +5,6 @@ import java.util.List;
  
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,6 +92,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         lblListHeader.setText(headerTitle);
  
         return convertView;
+    }
+
+    public void addElement(String parentName, List<String> childs){
+        _listDataHeader.add(parentName);
+        _listDataChild.put(parentName, childs);
+        notifyDataSetChanged();
     }
  
     @Override
