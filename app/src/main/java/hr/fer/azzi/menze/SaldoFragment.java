@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,6 +29,9 @@ public class SaldoFragment extends Fragment {
     Button provjeriButton;
     EditText upis;
     TextView prikazIznosa;
+    TextView brojKartice;
+    CheckBox zapamtiMe;
+    Button zaboraviMe;
     KorisnikDao korisnikDao;
 
     @Override
@@ -39,7 +43,7 @@ public class SaldoFragment extends Fragment {
 
 
         korisnikDao = new KorisnikDao(container.getContext());
-        Korisnik korisnk = korisnikDao.get(1l);
+        final Korisnik korisnk = korisnikDao.get(1l);
 
         if(korisnk != null && korisnk.getId_x() != 0){
             setVisibility(true);
@@ -53,6 +57,14 @@ public class SaldoFragment extends Fragment {
                 new SaldoCheck().execute(upis.getText().toString());
             }
         });
+
+        zaboraviMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                korisnikDao.delete(1L);
+                setVisibility(false);
+            }
+        });
         return view;
     }
 
@@ -60,17 +72,26 @@ public class SaldoFragment extends Fragment {
         provjeriButton = (Button) view.findViewById(R.id.provjeriButton);
         upis = (EditText) view.findViewById(R.id.editText);
         prikazIznosa = (TextView) view.findViewById(R.id.prikazIznosa);
+        brojKartice = (TextView) view.findViewById(R.id.broj_kartice_tv);
+        zapamtiMe = (CheckBox) view.findViewById(R.id.zapamtime_cb);
+        zaboraviMe = (Button) view.findViewById(R.id.zaboraviMe);
     }
 
     private void  setVisibility(boolean loggedIn){
         if(loggedIn){
-            provjeriButton.setVisibility(View.INVISIBLE);
-            upis.setVisibility(View.INVISIBLE);
+            provjeriButton.setVisibility(View.GONE);
+            upis.setVisibility(View.GONE);
+            brojKartice.setVisibility(View.GONE);
+            zapamtiMe.setVisibility(View.GONE);
             prikazIznosa.setVisibility(View.VISIBLE);
+            zaboraviMe.setVisibility(View.VISIBLE);
         }else{
+            brojKartice.setVisibility(View.VISIBLE);
+            zapamtiMe.setVisibility(View.VISIBLE);
             provjeriButton.setVisibility(View.VISIBLE);
             upis.setVisibility(View.VISIBLE);
             prikazIznosa.setVisibility(View.INVISIBLE);
+            zaboraviMe.setVisibility(View.INVISIBLE);
         }
 
    }
@@ -100,11 +121,13 @@ public class SaldoFragment extends Fragment {
                 prikazIznosa.setVisibility(View.VISIBLE);
                 return;
             }
-            Korisnik korisnik = new Korisnik();
-            korisnik.setId(1l);
-            korisnik.setId_x(Long.parseLong(upis.getText().toString()));
-            korisnik.setSaldo(Double.parseDouble(res));
-            korisnikDao.insert(korisnik);
+            if(zapamtiMe.isChecked()){
+                Korisnik korisnik = new Korisnik();
+                korisnik.setId(1l);
+                korisnik.setId_x(Long.parseLong(upis.getText().toString()));
+                korisnik.setSaldo(Double.parseDouble(res));
+                korisnikDao.insert(korisnik);
+            }
 
             prikazIznosa.setText(res);
             setVisibility(true);
