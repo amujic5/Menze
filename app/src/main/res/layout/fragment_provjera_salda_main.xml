@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#3052FFD9"
+    android:background="#60E4F1FE"
     tools:context=".MainActivity$PlaceholderFragment">
 
     <TextView
@@ -11,9 +11,10 @@
         android:textSize="30sp"
         android:gravity="center"
         android:textColor="#FFFFFF"
-        android:padding="5dp"
+        android:padding="10dp"
         android:background="#52B3D9"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -86,7 +87,7 @@
         <Button
             android:id="@+id/zaboraviMe"
             android:textColor="#FFFFFF"
-            android:background="#52B3D9"
+            android:background="#5052B3D9"
             android:text="Zaboravi me"
             android:textSize="18sp"
             android:layout_width="match_parent"

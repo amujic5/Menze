@@ -37,14 +37,14 @@
     </string-array>
 
     <string-array name="menzeRijeka">
-        <item>Indeks\tri_index</item>
-        <item>Mini\tri_mini</item>
-        <item>Caffe bar Medicinar\tri_medicina</item>
-        <item>Kampus\tri_kampus</item>
-        <item>Caffe bar Reful\tri_reful</item>
-        <item>Caffe bar Andrea\tri_andrea</item>
-        <item>Caffe bar Formula\tri_formula</item>
-        <item>Bistro Mul\tri_ika</item>
+        <item>Indeks\tri_index\tindex_html</item>
+        <item>Mini\tri_mini\tmini_html</item>
+        <item>Caffe bar Medicinar\tri_medicina\tmedicinar_html</item>
+        <item>Kampus\tri_kampus\tkampus_html</item>
+        <item>Caffe bar Reful\tri_reful\treful_html</item>
+        <item>Caffe bar Andrea\tri_andrea\tandrea_html</item>
+        <item>Caffe bar Formula\tri_formula\tformula_html</item>
+        <item>Bistro Mul\tri_ika\tmul_html</item>
     </string-array>
 
     <array name="menze">
@@ -183,7 +183,7 @@
         <item>
             &#8226;  07.00 – 16.00
         </item>
-    </string-array>
+</string-array>
     <string-array name="filozofija_html">
         <item>
             &#8226;  07.00 – 16.00
@@ -194,4 +194,122 @@
             &#8226;  07.30 – 19.00
         </item>
     </string-array>
+
+    <string-array name="index_html">
+        <item>
+            \t&#8226; pon-pet: 07:00 - 21:00
+        </item>
+        <item>
+            \t&#8226; subotom: 10:00 - 21:00
+        </item>
+        <item>
+            \t&#8226; nedeljom: 13:00 - 21:00
+        </item>
+        <item>
+            Linija 1
+        </item>
+        <item>
+            \t&#8226; 07:00 - 10:00
+        </item>
+        <item>
+            \t&#8226; 11:00 - 18:30
+        </item>
+        <item>
+            Linija 2
+        </item>
+        <item>
+            \t&#8226; 11:00 – 20:30
+        </item>
+        <item>
+            Snack Bar
+        </item>
+        <item>
+            \t&#8226; 10:00 – 20:30
+        </item>
+        <item>
+            Kavana i pizzerija
+        </item>
+         <item>
+            \t&#8226; pon-pet: 10:00 - 20:30
+        </item>
+        <item>
+            \t&#8226; subotom ne radi
+        </item>
+         <item>
+            \t&#8226; nedjeljom: 13:00 - 21:00
+        </item>
+    </string-array>
+
+    <string-array name="mini_html">
+        <item>
+            &#8226; pon-pet: 07:00 - 21:00
+        </item>
+        <item>
+            &#8226; subotom ne radi
+        </item>
+        <item>
+            &#8226; nedjeljom: 07:00 - 21:00
+        </item>
+
+    </string-array>
+
+    <string-array name="medicinar_html">
+        <item>
+            &#8226; pon-pet: 07:30 - 16:00
+        </item>
+    </string-array>
+
+    <string-array name="kampus_html">
+        <item>
+            \t&#8226; pon-pet: 11:00 - 18:30
+        </item>
+        <item>
+            \t&#8226; subotom i nedjeljom ne radi
+        </item>
+        <item>
+            Samposlužne linije
+        </item>
+        <item>
+            \t&#8226; 11:00 - 16:00
+        </item>
+        <item>
+            Pizzerija
+        </item>
+        <item>
+            \t&#8226; 12:00 - 18:00
+        </item>
+        <item>
+            Caffe Bar Akvarij
+        </item>
+        <item>
+            \t&#8226; 07:30 - 16:00
+        </item>
+    </string-array>
+
+    <string-array name="reful_html">
+        <item>
+            \t&#8226; pon-pet: 07:30 - 16:00
+        </item>
+    </string-array>
+
+    <string-array name="andrea_html">
+        <item>
+            \t&#8226; pon-pet: 07:30 - 14:00
+        </item>
+    </string-array>
+
+    <string-array name="formula_html">
+        <item>
+            \t&#8226; pon-pet: 07:30 - 14:00
+        </item>
+    </string-array>
+
+    <string-array name="mul_html">
+        <item>
+            \t&#8226; pon-pet: 07:30 - 17:00
+        </item>
+    </string-array>
+
+
+
 </resources>

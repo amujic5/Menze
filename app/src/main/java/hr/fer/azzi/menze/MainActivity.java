@@ -7,9 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
-
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -36,11 +33,11 @@ public class MainActivity extends ActionBarActivity {
     ListView dList;
     ArrayAdapter<String> adapter;
 
-    private boolean enabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
 
@@ -49,7 +46,6 @@ public class MainActivity extends ActionBarActivity {
         dList = (ListView) findViewById(R.id.left_drawer);
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,menu);
         dList.setAdapter(adapter);
-
         dList.setSelector(R.color.my_holo_blue_light);
 
 
@@ -64,20 +60,5 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
-    }
 
 }
