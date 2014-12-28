@@ -3,6 +3,7 @@ package hr.fer.azzi.menze;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,6 +30,17 @@ public class MjestoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        TextView iconFa = (TextView) view.findViewById(R.id.icon_fa);
+        Typeface fontFamily = Typeface.createFromAsset(container.getResources().getAssets(), "fontawesome.ttf");
+        iconFa.setTypeface(fontFamily);
+        iconFa.setText("\uf0c9 ");
+        iconFa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) MjestoFragment.this.getActivity()).showMenu();
+            }
+        });
 
         Bundle bundle = getArguments();
         if(bundle != null){

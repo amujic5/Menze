@@ -3,13 +3,10 @@ package hr.fer.azzi.menze;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -17,6 +14,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -91,27 +89,32 @@ public class MenzaDisplay extends Activity {
         @Override
         protected List<String> doInBackground(String...  strings) {
             List<String> redovi = new ArrayList<>();
-            redovi.add("");
             try{
                 Document doc = Jsoup.connect(strings[0]).get();
+                String docText = doc.text();
+
+                String beg = "Zadnja izmjena: ";
+                String res = docText.substring(docText.indexOf(beg, docText.indexOf(beg) + beg.length()) + beg.length(),
+                        docText.indexOf("View")).trim();
+                redovi.add(res);
+
                 Element element = doc.getElementsByClass("newsItem").get(1).getElementsByClass("content").get(0);
 
                 for(Element elementChild : element.children()){
-                  //  if(!redovi.get(redovi.size() - 1).isEmpty()){
-                       // redovi.add("");}
 
                     String line = elementChild.text();
-                  //  if(line.replace("\\s+","").length() == 1) continue;
+                    if(line.replaceAll("\\s+","").replaceAll("\\p{C}","").trim().length() < 2 && redovi.get(redovi.size() - 1).length() < 2) continue;
 
                     if(line.contains(":") && line.split(":").length > 1 && line.split(":")[1].length() > 15){
                         String[] jela = line.split(":")[1].split(",");
                         redovi.add("\t" + line.split(":")[0].trim());
                         for(String jelo : jela){
+                            if(jelo.trim().length() < 3)
+                                continue;
                             redovi.add("\t\t\u2022 " + jelo.trim());
                         }
                         continue;
                     }
-
                     redovi.add(line.trim());
                 }
             } catch (Exception e){
@@ -123,8 +126,9 @@ public class MenzaDisplay extends Activity {
 
         @Override
         protected void onPostExecute(List<String> lineList) {
-            Date date = new Date();
-            listAdapter.addElement("Meni " + date.toString(), lineList);
+            String date = lineList.get(0);
+            lineList.remove(0);
+            listAdapter.addElement("Meni " + date, lineList);
         }
     }
 }

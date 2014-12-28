@@ -1,8 +1,10 @@
 package hr.fer.azzi.menze;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ public class SaldoFragment extends Fragment {
     TextView brojKartice;
     CheckBox zapamtiMe;
     Button zaboraviMe;
+    TextView iconFa;
     KorisnikDao korisnikDao;
 
     @Override
@@ -39,6 +42,10 @@ public class SaldoFragment extends Fragment {
         setViews();
         setVisibility(false);
         upis.setText("601983");
+
+        Typeface fontFamily = Typeface.createFromAsset(container.getResources().getAssets(), "fontawesome.ttf");
+        iconFa.setTypeface(fontFamily);
+        iconFa.setText("\uf0c9 ");
 
 
         korisnikDao = new KorisnikDao(container.getContext());
@@ -64,6 +71,13 @@ public class SaldoFragment extends Fragment {
                 setVisibility(false);
             }
         });
+        iconFa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("frag", "frag ok");
+                ((MainActivity) SaldoFragment.this.getActivity()).showMenu();
+            }
+        });
         return view;
     }
 
@@ -74,6 +88,8 @@ public class SaldoFragment extends Fragment {
         brojKartice = (TextView) view.findViewById(R.id.broj_kartice_tv);
         zapamtiMe = (CheckBox) view.findViewById(R.id.zapamtime_cb);
         zaboraviMe = (Button) view.findViewById(R.id.zaboraviMe);
+        iconFa = (TextView) view.findViewById(R.id.icon_fa);
+
     }
 
     private void  setVisibility(boolean loggedIn){

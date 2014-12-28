@@ -2,11 +2,17 @@ package hr.fer.azzi.menze;
 
 
 import android.os.Bundle;
+
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
+
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -34,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
     ArrayAdapter<String> adapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +57,8 @@ public class MainActivity extends ActionBarActivity {
 
 
 
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mjestoPageAdapter = new MjestoPageAdapter(getSupportFragmentManager(), getApplicationContext());
@@ -57,8 +66,11 @@ public class MainActivity extends ActionBarActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mjestoPageAdapter);
+        mViewPager.setCurrentItem(1);
 
     }
 
-
+    public void showMenu(){
+        dLayout.openDrawer(Gravity.LEFT);
+    }
 }
