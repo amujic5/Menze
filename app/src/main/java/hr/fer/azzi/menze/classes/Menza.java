@@ -1,15 +1,18 @@
 package hr.fer.azzi.menze.classes;
 
+import com.turbomanage.storm.api.Entity;
+import com.turbomanage.storm.api.Id;
+
 import java.io.Serializable;
 
 /**
  * Created by Azzaro on 17.12.2014..
  */
+
 public class Menza implements Serializable{
+
     private String naziv;
     private String link;
-
-
     private int idSlike;
     private int idOpis;
 

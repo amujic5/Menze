@@ -19,6 +19,7 @@ import java.util.List;
 
 import hr.fer.azzi.menze.classes.Menza;
 
+
 /**
  * Created by Azzaro on 17.12.2014..
  */
@@ -91,6 +92,7 @@ public class MjestoFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
     }
 }

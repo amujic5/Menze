@@ -1,7 +1,12 @@
 package hr.fer.azzi.menze.classes;
 
+
+import android.content.Context;
+
 import com.turbomanage.storm.api.Entity;
 import com.turbomanage.storm.api.Id;
+
+
 
 /**
  * Created by Azzaro on 24.12.2014..
@@ -13,6 +18,7 @@ public class Korisnik {
     private long id;
     private long id_x;
     private double saldo;
+
 
     public long getId() {
         return id;

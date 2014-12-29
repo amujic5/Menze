@@ -1,18 +1,25 @@
 package hr.fer.azzi.menze;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.model.XYSeries;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+import org.achartengine.renderer.XYSeriesRenderer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -20,6 +27,7 @@ import java.io.IOException;
 
 import hr.fer.azzi.menze.classes.Korisnik;
 import hr.fer.azzi.menze.classes.dao.KorisnikDao;
+
 
 /**
  * Created by Azzaro on 23.12.2014..
@@ -35,6 +43,18 @@ public class SaldoFragment extends Fragment {
     Button zaboraviMe;
     TextView iconFa;
     KorisnikDao korisnikDao;
+    LinearLayout layout;
+
+
+    private GraphicalView mChart;
+
+    private XYMultipleSeriesDataset mDataset = new XYMultipleSeriesDataset();
+
+    private XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
+
+    private XYSeries mCurrentSeries;
+
+    private XYSeriesRenderer mCurrentRenderer;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +62,7 @@ public class SaldoFragment extends Fragment {
         setViews();
         setVisibility(false);
         upis.setText("601983");
+
 
         Typeface fontFamily = Typeface.createFromAsset(container.getResources().getAssets(), "fontawesome.ttf");
         iconFa.setTypeface(fontFamily);
@@ -53,9 +74,35 @@ public class SaldoFragment extends Fragment {
 
         if(korisnk != null && korisnk.getId_x() != 0){
             setVisibility(true);
-            prikazIznosa.setText(String.valueOf(korisnk.getSaldo()));
-        }
 
+            prikazIznosa.setText(String.valueOf(korisnk.getSaldo()));
+            if (mChart == null) {
+                initChart();
+               // addSampleData(dateSladoToupleDao.listAll());
+                mChart = ChartFactory.getCubeLineChartView(getActivity(), mDataset, mRenderer, 0.3f);
+                layout.addView(mChart);
+            } else {
+                mChart.repaint();
+            }
+        }
+        setClickListeners();
+
+        return view;
+    }
+
+   /* private void initDateSaldo() {
+        Random r = new Random();
+        for(int i = 0; i < 15; i++){
+            double randomValue = 5 + (360 - 5) * r.nextDouble();
+            DateSladoTouple dateSladoTouple = new DateSladoTouple();
+            //dateSladoTouple.setDate(new Date());
+            dateSladoTouple.setSaldo(randomValue);
+            dateSladoTouple.setId(r.nextLong());
+            dateSladoToupleDao.insert(dateSladoTouple);
+        }
+    }*/
+
+    private void setClickListeners() {
 
         provjeriButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,11 +121,9 @@ public class SaldoFragment extends Fragment {
         iconFa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("frag", "frag ok");
                 ((MainActivity) SaldoFragment.this.getActivity()).showMenu();
             }
         });
-        return view;
     }
 
     public void setViews() {
@@ -89,6 +134,7 @@ public class SaldoFragment extends Fragment {
         zapamtiMe = (CheckBox) view.findViewById(R.id.zapamtime_cb);
         zaboraviMe = (Button) view.findViewById(R.id.zaboraviMe);
         iconFa = (TextView) view.findViewById(R.id.icon_fa);
+        layout = (LinearLayout) view.findViewById(R.id.chart);
 
     }
 
@@ -100,6 +146,7 @@ public class SaldoFragment extends Fragment {
             zapamtiMe.setVisibility(View.GONE);
             prikazIznosa.setVisibility(View.VISIBLE);
             zaboraviMe.setVisibility(View.VISIBLE);
+            layout.setVisibility(View.VISIBLE);
         }else{
             brojKartice.setVisibility(View.VISIBLE);
             zapamtiMe.setVisibility(View.VISIBLE);
@@ -107,6 +154,7 @@ public class SaldoFragment extends Fragment {
             upis.setVisibility(View.VISIBLE);
             prikazIznosa.setVisibility(View.INVISIBLE);
             zaboraviMe.setVisibility(View.INVISIBLE);
+            layout.setVisibility(View.GONE);
         }
 
    }
@@ -148,4 +196,31 @@ public class SaldoFragment extends Fragment {
             setVisibility(true);
         }
     }
+
+
+    private void initChart() {
+        mCurrentSeries = new XYSeries("Graf potrosnje");
+        mDataset.addSeries(mCurrentSeries);
+        mCurrentRenderer = new XYSeriesRenderer();
+        mRenderer.addSeriesRenderer(mCurrentRenderer);
+        mRenderer.setApplyBackgroundColor(true);
+        mRenderer.setBackgroundColor(Color.WHITE);
+        mRenderer.setMarginsColor(Color.argb(96,228,241,254));
+    }
+
+  /*  private void addSampleData(List<DateSladoTouple> mapaPotrosnje) {
+
+        int i = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("E dd.MM.yyyy");
+        for(DateSladoTouple dateSladoTouple : mapaPotrosnje){
+            i++;
+            mCurrentSeries.add(i, dateSladoTouple.getSaldo());
+           // mCurrentSeries.addAnnotation(sdf.format(dateSladoTouple.getDate()), i, dateSladoTouple.getSaldo());
+        }
+
+    }*/
+
+
+
+
 }

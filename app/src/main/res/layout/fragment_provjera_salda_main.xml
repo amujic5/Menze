@@ -89,6 +89,7 @@
         </LinearLayout>
 
 
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -115,5 +116,12 @@
         </LinearLayout>
 
 
+    <LinearLayout
+        android:id="@+id/chart"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
 
 </LinearLayout>

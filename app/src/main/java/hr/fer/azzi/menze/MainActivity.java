@@ -13,31 +13,24 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    MjestoPageAdapter mjestoPageAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+    MjestoPageAdapter mjestoPageAdapter;
     ViewPager mViewPager;
 
-    String[] menu;
+
     DrawerLayout dLayout;
     ListView dList;
-    ArrayAdapter<String> adapter;
+    MenuAdapter adapter;
 
 
 
@@ -47,17 +40,17 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
+        List<String> menu = new ArrayList<>();
+        menu.add("Stanje X-ice");
+        menu.add("Zagreb");
+        menu.add("Split");
+        menu.add("Rijeka");
 
-        menu = new String[]{"Home","Android","Windows","Linux","Raspberry Pi","WordPress","Videos","Contact Us"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer);
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,menu);
+        adapter = new MenuAdapter(this, android.R.layout.simple_list_item_1, menu);
         dList.setAdapter(adapter);
         dList.setSelector(R.color.my_holo_blue_light);
-
-
-
-
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -67,6 +60,15 @@ public class MainActivity extends ActionBarActivity {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mjestoPageAdapter);
         mViewPager.setCurrentItem(1);
+
+        dList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                mViewPager.setCurrentItem(pos);
+
+                dLayout.closeDrawers();
+            }
+        });
 
     }
 

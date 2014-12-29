@@ -35,8 +35,8 @@ dependencies {
     compile 'log4j:log4j:1.2.17'
     compile 'javax.persistence:persistence-api:1.0'
     compile 'com.turbomanage.storm:storm-api:0.98'
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.2'
     compile files('C:/Users/Azzaro/Desktop/workspace/AndroidStudioProjects/Menze/.idea/libraries/jsoup-1.8.1.jar')
+    compile files('libs/achartengine-1.1.0.jar')
 }
