@@ -135,6 +135,7 @@ public class SaldoFragment extends Fragment {
                 if(alarmManager != null) {
                     alarmManager.cancel(alarmIntent);
                 }
+                mCurrentSeries.clear();
             }
         });
         iconFa.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +145,8 @@ public class SaldoFragment extends Fragment {
             }
         });
     }
+
+
 
     public void setViews() {
         provjeriButton = (Button) view.findViewById(R.id.provjeriButton);
@@ -155,6 +158,9 @@ public class SaldoFragment extends Fragment {
         iconFa = (TextView) view.findViewById(R.id.icon_fa);
         layout = (LinearLayout) view.findViewById(R.id.chart);
 
+        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent alertIntent = new Intent(getActivity(), SaldoReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, alertIntent, 0);
     }
 
     private void  setVisibility(boolean loggedIn){
@@ -240,6 +246,7 @@ public class SaldoFragment extends Fragment {
 
     private void addSampleData(List<DateSaldo> mapaPotrosnje) {
 
+
         int i = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("E dd.MM.yyyy");
         for(DateSaldo dateSaldo : mapaPotrosnje){
@@ -257,15 +264,10 @@ public class SaldoFragment extends Fragment {
 
         // Define our intention of executing AlertReceiver
 
-        Intent alertIntent = new Intent(getActivity(), SaldoReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, alertIntent, 0);
-
-        // Allows you to schedule for your application to do something at a later date
-        // even if it is in he background or isn't active
-        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-
+        //TODO change time
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 5 * 1000L,
                 10*1000L, alarmIntent);
+
 
     }
 
