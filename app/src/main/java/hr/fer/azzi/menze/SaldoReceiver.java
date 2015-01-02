@@ -1,7 +1,9 @@
 package hr.fer.azzi.menze;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,14 +38,30 @@ public class SaldoReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("poceo reciver","poceo reciver");
-        this.context = context;
         korisnikDao = new KorisnikDao(context);
         korisnik = korisnikDao.get(1l);
+        this.context = context;
+        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+            if(korisnik != null && korisnik.getId_x() != 0){
+                setAlarm();
+            }
+            return;
+        }
 
         if(korisnik != null && korisnik.getId_x() != 0){
             dateSaldoDao = new DateSaldoDao(context);
             new getSaldo().execute();
         }
+    }
+
+    private void setAlarm() {
+        AlarmManager alarmManager;
+        PendingIntent alarmIntent;
+        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent alertIntent = new Intent(context, SaldoReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(context, 0, alertIntent, 0);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, AlarmManager.INTERVAL_DAY,
+        AlarmManager.INTERVAL_DAY, alarmIntent);
     }
 
     private class getSaldo extends AsyncTask<Void, Void, String>{

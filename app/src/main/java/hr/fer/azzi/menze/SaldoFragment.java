@@ -30,7 +30,6 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import hr.fer.azzi.menze.classes.DateSaldo;
@@ -189,7 +188,7 @@ public class SaldoFragment extends Fragment {
     private class SaldoCheck extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            Document doc = null;
+            Document doc;
             try {
                 Log.d("poruka",strings[0]);
                 doc = Jsoup.connect("http://www.cap.srce.hr/saldo.aspx?brk=" + strings[0]).timeout(0).get();
@@ -198,11 +197,10 @@ public class SaldoFragment extends Fragment {
             }
             String docText = doc.text();
             String beg = "Preostali saldo:";
-            String res = docText.substring(docText.indexOf(beg) + beg.length(),
+
+
+            return docText.substring(docText.indexOf(beg) + beg.length(),
                     docText.indexOf("Status kartice:")).trim().replace(',','.');
-
-
-            return res;
         }
 
         @Override
@@ -245,8 +243,6 @@ public class SaldoFragment extends Fragment {
     }
 
     private void addSampleData(List<DateSaldo> mapaPotrosnje) {
-
-
         int i = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("E dd.MM.yyyy");
         for(DateSaldo dateSaldo : mapaPotrosnje){
@@ -258,17 +254,9 @@ public class SaldoFragment extends Fragment {
     }
 
     public void setAlarm() {
-
-        // Define a time value of 5 seconds
-        Long alertTime = new GregorianCalendar().getTimeInMillis()+10*1000;
-
-        // Define our intention of executing AlertReceiver
-
         //TODO change time
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 5 * 1000L,
                 10*1000L, alarmIntent);
-
-
     }
 
 }
