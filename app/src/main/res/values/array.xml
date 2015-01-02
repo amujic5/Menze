@@ -8,19 +8,19 @@
 
     <!--ime <tab> imeSlike <tab> opis <tab> link-->
     <string-array name="menzeZagreb">
-        <item>Fer Cassandra\tfer\tsc_savska_html\t</item>
+        <item>Fer Cassandra\tfer\tcassandra_html\thttp://www.cassandra.hr/menu/studentski-menu/</item>
         <item>Savska\tsc_savska\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/savska/</item>
-        <item>SD S.Radić\tstjepanradic\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-s-radic/</item>
-        <item>SD Cvjetno Naselje\tcvjetno\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-cvjetno-naselje/</item>
-        <item>SD Lašćina\tlascina\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-lascina/</item>
-        <item>ZUK Borongaj\tborongaj\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/zuk-borongaj/</item>
-        <item>Ekonomija\tekonomija\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/ekonomija/</item>
-        <item>Medicina\tmedicina\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/medicina/</item>
-        <item>Veterina\tveterina\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/veterina/</item>
-        <item>Šumarstvo\tsumarstvo\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sumarstvo/</item>
-        <item>FSB\tfsb\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/fsb/</item>
-        <item>ALU\talu\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/alu/</item>
-        <item>Blagavaona TTF\tttf\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/blagovaona-ttf/</item>
+        <item>SD S.Radić\tstjepanradic\ts_radic_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-s-radic/</item>
+        <item>SD Cvjetno Naselje\tcvjetno\tcvjetno_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-cvjetno-naselje/</item>
+        <item>SD Lašćina\tlascina\tlascina_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-lascina/</item>
+        <item>ZUK Borongaj\tborongaj\tborongaj_html\thttp://www.sczg.unizg.hr/prehrana/restorani/zuk-borongaj/</item>
+        <item>Ekonomija\tekonomija\tekonomija_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/ekonomija/</item>
+        <item>Medicina\tmedicina\tmedicina_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/medicina/</item>
+        <item>Veterina\tveterina\tveterina_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/veterina/</item>
+        <item>Šumarstvo\tsumarstvo\tsumarstvo_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sumarstvo/</item>
+        <item>FSB\tfsb\tfsb_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/fsb/</item>
+        <item>ALU\talu\talu_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/alu/</item>
+        <item>Blagavaona TTF\tttf\tttf_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/blagovaona-ttf/</item>
     </string-array>
 
     <string-array name="menzeSplit">
@@ -52,6 +52,184 @@
         <item>@array/menzeSplit</item>
         <item>@array/menzeRijeka</item>
     </array>
+
+    <string-array name="cassandra_html">
+        <item>
+            1. Restoran
+        </item>
+        <item>
+            \t&#8226; 10:00 - 16:00
+        </item>
+        <item>
+            2. Sendvič bar
+        </item>
+        <item>
+            \t&#8226; 8:00 - 19:00
+        </item>
+        <item>
+            subotom i nedjeljom na radi
+        </item>
+    </string-array>
+
+    <string-array name="veterina_zg_html">
+        <item>
+            Restoran
+        </item>
+        <item>
+            \t&#8226; 8:00 – 15:00
+        </item>
+        <item>
+            \t&#8226; subotom i nedjeljom ne radi
+        </item>
+    </string-array>
+
+    <string-array name="ttf_zg_html">
+        <item>
+            Restoran
+        </item>
+        <item>
+            \t&#8226; 8:00 – 14:00
+        </item>
+        <item>
+            \t&#8226; subotom i nedjeljom ne radi
+        </item>
+    </string-array>
+
+    <string-array name="alu_zg_html">
+        <item>
+            Restoran
+        </item>
+        <item>
+            \t&#8226; doručak 9:00 – 11:00
+        </item>
+        <item>
+            \t&#8226; ručak 12:00 – 15:00
+        </item>
+        <item>
+            \t&#8226; subotom i nedjeljom ne radi
+        </item>
+    </string-array>
+
+    <string-array name="fsb_zg_html">
+        <item>
+            Restoran
+        </item>
+        <item>
+            \t&#8226; 8:00 – 16:00
+        </item>
+        <item>
+            \t&#8226; subotom i nedjeljom ne radi
+        </item>
+    </string-array>
+
+    <string-array name="sumarstvo_zg_html">
+        <item>
+            Restoran
+        </item>
+        <item>
+            \t&#8226; 8:00 – 15:00
+        </item>
+        <item>
+            \t&#8226; subotom i nedjeljom ne radi
+        </item>
+    </string-array>
+
+    <string-array name="medicina_zg_html">
+        <item>
+            Restoran
+        </item>
+        <item>
+            \t&#8226; 7:30 – 18:00
+        </item>
+        <item>
+            \t&#8226; subotom i nedjeljom ne radi
+        </item>
+    </string-array>
+
+    <string-array name="ekonomija_zg_html">
+        <item>
+            1. Restoran ekonomija:
+        </item>
+        <item>
+            \t&#8226; 11:00 – 15:00
+        </item>
+        <item>
+            2.Restoran Kefa:
+        </item>
+        <item>
+            \t&#8226; 7:30 – 20:00
+        </item>
+        <item>
+            Subotom i nedjeljom ne rade
+        </item>
+    </string-array>
+    
+    <string-array name="borongaj_html">
+        <item>
+            1. Restoran:
+        </item>
+        <item>
+            \t Pon-čet
+        </item>
+        <item>
+            \t\t&#8226; doručak 7:30 - 10:00
+        </item>
+        <item>
+            \t\t&#8226; ručak 10:00 - 16:00
+        </item>
+        <item>
+            \t Petak
+        </item>
+        <item>
+            \t\t&#8226; doručak 7:30 - 10:00
+        </item>
+        <item>
+            \t\t&#8226; ručak 10:00 - 14:30
+        </item>
+        <item>
+            \t subotom i nedjeljom ne radi
+        </item>
+        <item>
+            2. Caffe Bar
+        </item>
+        <item>
+            \t pon-čet
+        </item>
+        <item>
+            \t\t&#8226; 7:30 - 16:00
+        </item>
+        <item>
+            \t petak
+        </item>
+        <item>
+            \t\t&#8226; 7:30 - 14:30
+        </item>
+        <item>
+            \t subotom i nedjeljom ne radi
+        </item>
+
+    </string-array>
+
+    <string-array name="lascina_html">
+        <item>
+            Restoran:
+        </item>
+        <item>
+            \t&#8226; doručak 8:00 - 9:30
+        </item>
+        <item>
+            \t&#8226; ručak 11:00 - 15:30
+        </item>
+        <item>
+            \t&#8226; večera 17:30 - 20:30
+        </item>
+        <item>
+            \t&#8226; subotom večera 17:30 - 20:00
+        </item>
+        <item>
+            \t&#8226; nedjeljom ne radi
+        </item>
+    </string-array>
 
     <string-array name="sc_savska_html">
         <item>
@@ -89,6 +267,109 @@
         </item>
         <item>
             \t&#8226; nedjeljom ne radi
+        </item>
+
+    </string-array>
+
+    <string-array name="s_radic_html">
+        <item>
+            1. Restoran:
+        </item>
+        <item>
+            \t&#8226; doručak 7:00 – 09:30
+        </item>
+        <item>
+            \t&#8226; doručak subotom 08:00 – 10:00
+        </item>
+        <item>
+            \t&#8226; nedeljom nema doručka
+        </item>
+        <item>
+            \t&#8226; ručak 11:30 – 16:00
+        </item>
+        <item>
+            \t&#8226; večera 17:30 – 21:00
+        </item>
+        <item>
+            2. Restoran II:
+        </item>
+        <item>
+            \t&#8226; ručak 12:00 – 16:30
+        </item>
+        <item>
+            \t&#8226; večera 18:00 – 21:30
+        </item>
+        <item>
+           3. Pizzeria:
+        </item>
+        <item>
+            \t&#8226; 9:30 – 20:30
+        </item>
+        <item>
+            \t&#8226; pauza 15:00- 16:30
+        </item>
+        <item>
+           \t&#8226; subotom i nedjeljom ne radi
+        </item>
+        <item>
+            4. Slastičarnica:
+        </item>
+        <item>
+            \t&#8226; 11:00 – 22:00
+        </item>
+        <item>
+            \t&#8226; pauza 16:00 – 17:00
+        </item>
+        <item>
+            \t&#8226; nedjeljom ne radi
+        </item>
+    </string-array>
+
+    <string-array name="cvjetno_html">
+        <item>
+            1. Restoran:
+        </item>
+        <item>
+            \tlinija I
+        </item>
+        <item>
+            \t\t&#8226; ručak 11:00 – 16:00
+        </item>
+        <item>
+            \t\t&#8226; večera 17:30 – 21:00
+        </item>
+        <item>
+            \tlinija II
+        </item>
+        <item>
+            \t\t&#8226; doručak 07:00 – 10:00
+        </item>
+        <item>
+            \t\t&#8226; ručak 12:00 – 15:00
+        </item>
+        <item>
+            \t\t&#8226; večera 17:30 – 20:00
+        </item>
+        <item>
+           \tSubota, nedjelja i blagdan:
+        </item>
+        <item>
+            \t\t&#8226; doručak 8:00 - 10:00
+        </item>
+        <item>
+            \t\t&#8226; linija II ne radi za večeru
+        </item>
+        <item>
+            2. Caffe Bar:
+        </item>
+        <item>
+            \t&#8226; 8:00 - 21:00
+        </item>
+        <item>
+           \t&#8226; prodaja slastica: 8:00 - 21:00
+        </item>
+        <item>
+           \t&#8226; Subotom, nedjeljom i blagdanom ne radi.
         </item>
 
     </string-array>

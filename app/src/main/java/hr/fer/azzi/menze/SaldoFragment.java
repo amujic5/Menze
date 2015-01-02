@@ -58,22 +58,11 @@ public class SaldoFragment extends Fragment {
     AlarmManager alarmManager;
     PendingIntent alarmIntent;
 
-
     private GraphicalView mChart;
-
     private XYMultipleSeriesDataset mDataset = new XYMultipleSeriesDataset();
-
     private XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
-
     private XYSeries mCurrentSeries;
-
     private XYSeriesRenderer mCurrentRenderer;
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -102,7 +91,6 @@ public class SaldoFragment extends Fragment {
                 mChart = ChartFactory.getCubeLineChartView(getActivity(), mDataset, mRenderer, 0.3f);
                 layout.addView(mChart);
             }else{
-                //mChart.repaint();
                 mChart = ChartFactory.getCubeLineChartView(getActivity(), mDataset, mRenderer, 0.3f);
                 layout.addView(mChart);
             }
@@ -185,6 +173,33 @@ public class SaldoFragment extends Fragment {
 
    }
 
+
+    private void addSampleData(List<DateSaldo> mapaPotrosnje) {
+        int i = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("E dd.MM.yyyy");
+        for(DateSaldo dateSaldo : mapaPotrosnje){
+            i++;
+            mCurrentSeries.add(i, dateSaldo.getSaldo());
+            mCurrentSeries.addAnnotation(sdf.format(dateSaldo.getDate()), i, dateSaldo.getSaldo());
+        }
+
+    }
+
+    private void initChart() {
+        mCurrentSeries = new XYSeries("Graf potrosnje");
+        mDataset.addSeries(mCurrentSeries);
+        mCurrentRenderer = new XYSeriesRenderer();
+        mRenderer.addSeriesRenderer(mCurrentRenderer);
+        mRenderer.setApplyBackgroundColor(true);
+        mRenderer.setBackgroundColor(Color.WHITE);
+        mRenderer.setMarginsColor(Color.argb(96,228,241,254));
+    }
+
+    public void setAlarm() {
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,AlarmManager.INTERVAL_DAY,
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+    }
+
     private class SaldoCheck extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -197,8 +212,6 @@ public class SaldoFragment extends Fragment {
             }
             String docText = doc.text();
             String beg = "Preostali saldo:";
-
-
             return docText.substring(docText.indexOf(beg) + beg.length(),
                     docText.indexOf("Status kartice:")).trim().replace(',','.');
         }
@@ -230,33 +243,4 @@ public class SaldoFragment extends Fragment {
 
         }
     }
-
-
-    private void initChart() {
-        mCurrentSeries = new XYSeries("Graf potrosnje");
-        mDataset.addSeries(mCurrentSeries);
-        mCurrentRenderer = new XYSeriesRenderer();
-        mRenderer.addSeriesRenderer(mCurrentRenderer);
-        mRenderer.setApplyBackgroundColor(true);
-        mRenderer.setBackgroundColor(Color.WHITE);
-        mRenderer.setMarginsColor(Color.argb(96,228,241,254));
-    }
-
-    private void addSampleData(List<DateSaldo> mapaPotrosnje) {
-        int i = 0;
-        SimpleDateFormat sdf = new SimpleDateFormat("E dd.MM.yyyy");
-        for(DateSaldo dateSaldo : mapaPotrosnje){
-            i++;
-            mCurrentSeries.add(i, dateSaldo.getSaldo());
-            mCurrentSeries.addAnnotation(sdf.format(dateSaldo.getDate()), i, dateSaldo.getSaldo());
-        }
-
-    }
-
-    public void setAlarm() {
-        //TODO change time
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 5 * 1000L,
-                10*1000L, alarmIntent);
-    }
-
 }

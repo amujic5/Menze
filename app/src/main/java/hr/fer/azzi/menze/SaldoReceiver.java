@@ -41,7 +41,9 @@ public class SaldoReceiver extends BroadcastReceiver{
         korisnikDao = new KorisnikDao(context);
         korisnik = korisnikDao.get(1l);
         this.context = context;
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+        if (intent != null &&
+                intent.getAction() != null &&
+                intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             if(korisnik != null && korisnik.getId_x() != 0){
                 setAlarm();
             }
@@ -69,15 +71,14 @@ public class SaldoReceiver extends BroadcastReceiver{
 
         @Override
         protected String doInBackground(Void... voids) {
-            Document doc = null;
+            Document doc;
             try {
                 doc = Jsoup.connect("http://www.cap.srce.hr/saldo.aspx?brk=" + korisnik.getId_x()).timeout(0).get();
                 String docText = doc.text();
                 String beg = "Preostali saldo:";
-                String res = docText.substring(docText.indexOf(beg) + beg.length(),
-                        docText.indexOf("Status kartice:")).trim().replace(',','.');
 
-                return res;
+                return docText.substring(docText.indexOf(beg) + beg.length(),
+                        docText.indexOf("Status kartice:")).trim().replace(',','.');
             } catch (IOException e) {
             }
                 return null;
@@ -115,23 +116,12 @@ public class SaldoReceiver extends BroadcastReceiver{
                         .setTicker("Saldo obavijest")
                         .setContentText("trenutni saldo: " + res);
 
-        // Defines the Intent to fire when the notification is clicked
-       // mBuilder.setContentIntent(notificIntent);
-
-        // Set the default notification option
-        // DEFAULT_SOUND : Make sound
-        // DEFAULT_VIBRATE : Vibrate
-        // DEFAULT_LIGHTS : Use the default light notification
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);
-
-        // Auto cancels the notification when clicked on in the task bar
         mBuilder.setAutoCancel(true);
 
-        // Gets a NotificationManager which is used to notify the user of the background event
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Post the notification
         mNotificationManager.notify(1, mBuilder.build());
     }
 }

@@ -90,7 +90,7 @@ public class MenzaDisplay extends Activity {
         protected List<String> doInBackground(String...  strings) {
             List<String> redovi = new ArrayList<>();
             try{
-                Document doc = Jsoup.connect(strings[0]).get();
+                Document doc = Jsoup.connect(strings[0]).timeout(0).get();
                 String docText = doc.text();
 
                 String beg = "Zadnja izmjena: ";
@@ -126,6 +126,8 @@ public class MenzaDisplay extends Activity {
 
         @Override
         protected void onPostExecute(List<String> lineList) {
+            if(lineList.isEmpty())
+                return;
             String date = lineList.get(0);
             lineList.remove(0);
             listAdapter.addElement("Meni " + date, lineList);
