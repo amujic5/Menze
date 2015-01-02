@@ -53,20 +53,22 @@ public class SaldoReceiver extends BroadcastReceiver{
         protected String doInBackground(Void... voids) {
             Document doc = null;
             try {
-                doc = Jsoup.connect("http://www.cap.srce.hr/saldo.aspx?brk=" + korisnik.getId_x()).get();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String docText = doc.text();
-            String beg = "Preostali saldo:";
-            String res = docText.substring(docText.indexOf(beg) + beg.length(),
-                    docText.indexOf("Status kartice:")).trim().replace(',','.');
+                doc = Jsoup.connect("http://www.cap.srce.hr/saldo.aspx?brk=" + korisnik.getId_x()).timeout(0).get();
+                String docText = doc.text();
+                String beg = "Preostali saldo:";
+                String res = docText.substring(docText.indexOf(beg) + beg.length(),
+                        docText.indexOf("Status kartice:")).trim().replace(',','.');
 
-            return res;
+                return res;
+            } catch (IOException e) {
+            }
+                return null;
         }
 
         @Override
         protected void onPostExecute(String res) {
+            if (res == null)
+                return;
             Log.d("dohvaceno","dohvacenoooo");
             double saldoDobule = Double.parseDouble(res);
             korisnik.setSaldo(saldoDobule);

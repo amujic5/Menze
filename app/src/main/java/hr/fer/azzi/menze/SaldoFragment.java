@@ -71,6 +71,12 @@ public class SaldoFragment extends Fragment {
     private XYSeriesRenderer mCurrentRenderer;
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_provjera_salda_main, container, false);
         setViews();
@@ -82,25 +88,28 @@ public class SaldoFragment extends Fragment {
         iconFa.setTypeface(fontFamily);
         iconFa.setText("\uf0c9 ");
 
-
         korisnikDao = new KorisnikDao(container.getContext());
         dateSaldoDao = new DateSaldoDao(container.getContext());
 
         final Korisnik korisnk = korisnikDao.get(1l);
 
         if(korisnk != null && korisnk.getId_x() != 0){
+            prikazIznosa.setText(String.valueOf(korisnk.getSaldo()));
             setVisibility(true);
 
-            prikazIznosa.setText(String.valueOf(korisnk.getSaldo()));
-            if (mChart == null) {
+            if(mChart == null){
                 initChart();
                 addSampleData(dateSaldoDao.listAll());
                 mChart = ChartFactory.getCubeLineChartView(getActivity(), mDataset, mRenderer, 0.3f);
                 layout.addView(mChart);
-            } else {
-                mChart.repaint();
+            }else{
+                //mChart.repaint();
+                mChart = ChartFactory.getCubeLineChartView(getActivity(), mDataset, mRenderer, 0.3f);
+                layout.addView(mChart);
             }
+
         }
+
         setClickListeners();
 
         return view;
@@ -121,6 +130,11 @@ public class SaldoFragment extends Fragment {
             public void onClick(View view) {
                 korisnikDao.delete(1L);
                 setVisibility(false);
+                if(dateSaldoDao != null)
+                    dateSaldoDao.deleteAll();
+                if(alarmManager != null) {
+                    alarmManager.cancel(alarmIntent);
+                }
             }
         });
         iconFa.setOnClickListener(new View.OnClickListener() {
@@ -160,10 +174,8 @@ public class SaldoFragment extends Fragment {
             prikazIznosa.setVisibility(View.INVISIBLE);
             zaboraviMe.setVisibility(View.INVISIBLE);
             layout.setVisibility(View.GONE);
-            if(dateSaldoDao != null)
-                dateSaldoDao.deleteAll();
-            if(alarmManager != null)
-                alarmManager.cancel(alarmIntent);
+
+
         }
 
    }
@@ -173,9 +185,10 @@ public class SaldoFragment extends Fragment {
         protected String doInBackground(String... strings) {
             Document doc = null;
             try {
-                doc = Jsoup.connect("http://www.cap.srce.hr/saldo.aspx?brk=" + strings[0]).get();
+                Log.d("poruka",strings[0]);
+                doc = Jsoup.connect("http://www.cap.srce.hr/saldo.aspx?brk=" + strings[0]).timeout(0).get();
             } catch (IOException e) {
-                e.printStackTrace();
+                return null;
             }
             String docText = doc.text();
             String beg = "Preostali saldo:";
@@ -188,6 +201,12 @@ public class SaldoFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String res) {
+            if(res == null){
+                prikazIznosa.setText("Poteškoće s konekcijom");
+                prikazIznosa.setVisibility(View.VISIBLE);
+                return;
+            }
+
             if(res.isEmpty()){
                 prikazIznosa.setText("Krivi broj kartice");
                 prikazIznosa.setVisibility(View.VISIBLE);
@@ -224,7 +243,6 @@ public class SaldoFragment extends Fragment {
         int i = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("E dd.MM.yyyy");
         for(DateSaldo dateSaldo : mapaPotrosnje){
-            Log.d("dodavanje", "dodaj... " + i);
             i++;
             mCurrentSeries.add(i, dateSaldo.getSaldo());
             mCurrentSeries.addAnnotation(sdf.format(dateSaldo.getDate()), i, dateSaldo.getSaldo());

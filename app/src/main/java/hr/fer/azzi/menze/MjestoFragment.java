@@ -77,7 +77,6 @@ public class MjestoFragment extends Fragment {
             }
 
             menzeList.add(menza);
-            Log.d("test", nazivMenze);
         }
 
         MenzeAdapter menzeAdapter = new MenzeAdapter(view.getContext(),R.layout.row_menza_layout, menzeList);
