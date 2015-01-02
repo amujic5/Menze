@@ -3,6 +3,7 @@
     package="hr.fer.azzi.menze" >
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -21,6 +22,9 @@
         <activity android:name=".MenzaDisplay">
 
         </activity>
+        <receiver android:name=".SaldoReceiver">
+
+        </receiver>
     </application>
 
 </manifest>

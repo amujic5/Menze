@@ -1,10 +1,15 @@
 package hr.fer.azzi.menze;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +29,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.List;
 
+import hr.fer.azzi.menze.classes.DateSaldo;
 import hr.fer.azzi.menze.classes.Korisnik;
+import hr.fer.azzi.menze.classes.dao.DateSaldoDao;
 import hr.fer.azzi.menze.classes.dao.KorisnikDao;
 
 
@@ -44,6 +54,10 @@ public class SaldoFragment extends Fragment {
     TextView iconFa;
     KorisnikDao korisnikDao;
     LinearLayout layout;
+
+    DateSaldoDao dateSaldoDao;
+    AlarmManager alarmManager;
+    PendingIntent alarmIntent;
 
 
     private GraphicalView mChart;
@@ -70,6 +84,8 @@ public class SaldoFragment extends Fragment {
 
 
         korisnikDao = new KorisnikDao(container.getContext());
+        dateSaldoDao = new DateSaldoDao(container.getContext());
+
         final Korisnik korisnk = korisnikDao.get(1l);
 
         if(korisnk != null && korisnk.getId_x() != 0){
@@ -78,7 +94,7 @@ public class SaldoFragment extends Fragment {
             prikazIznosa.setText(String.valueOf(korisnk.getSaldo()));
             if (mChart == null) {
                 initChart();
-               // addSampleData(dateSladoToupleDao.listAll());
+                addSampleData(dateSaldoDao.listAll());
                 mChart = ChartFactory.getCubeLineChartView(getActivity(), mDataset, mRenderer, 0.3f);
                 layout.addView(mChart);
             } else {
@@ -90,17 +106,6 @@ public class SaldoFragment extends Fragment {
         return view;
     }
 
-   /* private void initDateSaldo() {
-        Random r = new Random();
-        for(int i = 0; i < 15; i++){
-            double randomValue = 5 + (360 - 5) * r.nextDouble();
-            DateSladoTouple dateSladoTouple = new DateSladoTouple();
-            //dateSladoTouple.setDate(new Date());
-            dateSladoTouple.setSaldo(randomValue);
-            dateSladoTouple.setId(r.nextLong());
-            dateSladoToupleDao.insert(dateSladoTouple);
-        }
-    }*/
 
     private void setClickListeners() {
 
@@ -155,6 +160,10 @@ public class SaldoFragment extends Fragment {
             prikazIznosa.setVisibility(View.INVISIBLE);
             zaboraviMe.setVisibility(View.INVISIBLE);
             layout.setVisibility(View.GONE);
+            if(dateSaldoDao != null)
+                dateSaldoDao.deleteAll();
+            if(alarmManager != null)
+                alarmManager.cancel(alarmIntent);
         }
 
    }
@@ -190,10 +199,12 @@ public class SaldoFragment extends Fragment {
                 korisnik.setId_x(Long.parseLong(upis.getText().toString()));
                 korisnik.setSaldo(Double.parseDouble(res));
                 korisnikDao.insert(korisnik);
+                setAlarm();
             }
 
             prikazIznosa.setText(res);
             setVisibility(true);
+
         }
     }
 
@@ -208,19 +219,36 @@ public class SaldoFragment extends Fragment {
         mRenderer.setMarginsColor(Color.argb(96,228,241,254));
     }
 
-  /*  private void addSampleData(List<DateSladoTouple> mapaPotrosnje) {
+    private void addSampleData(List<DateSaldo> mapaPotrosnje) {
 
         int i = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("E dd.MM.yyyy");
-        for(DateSladoTouple dateSladoTouple : mapaPotrosnje){
+        for(DateSaldo dateSaldo : mapaPotrosnje){
+            Log.d("dodavanje", "dodaj... " + i);
             i++;
-            mCurrentSeries.add(i, dateSladoTouple.getSaldo());
-           // mCurrentSeries.addAnnotation(sdf.format(dateSladoTouple.getDate()), i, dateSladoTouple.getSaldo());
+            mCurrentSeries.add(i, dateSaldo.getSaldo());
+            mCurrentSeries.addAnnotation(sdf.format(dateSaldo.getDate()), i, dateSaldo.getSaldo());
         }
 
-    }*/
+    }
 
+    public void setAlarm() {
 
+        // Define a time value of 5 seconds
+        Long alertTime = new GregorianCalendar().getTimeInMillis()+10*1000;
 
+        // Define our intention of executing AlertReceiver
+
+        Intent alertIntent = new Intent(getActivity(), SaldoReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, alertIntent, 0);
+
+        // Allows you to schedule for your application to do something at a later date
+        // even if it is in he background or isn't active
+        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 5 * 1000L,
+                10*1000L, alarmIntent);
+
+    }
 
 }

@@ -13,7 +13,7 @@ import com.turbomanage.storm.api.DatabaseFactory;
 public class DataBase extends DatabaseHelper {
 
     public final static String DB_NAME = "samples";
-    public final static int DB_VERSION = 1;
+    public final static int DB_VERSION = 2;
 
     /**
      * The constructor that should be overridden. Simply invoke
