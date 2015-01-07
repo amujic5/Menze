@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:layout_marginBottom="5dp"
-    android:background="#60E4F1FE">
+    android:background="#5052B3D9">
 
     <ImageView
         android:id="@+id/menza_image"

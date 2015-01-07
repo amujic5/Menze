@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -144,11 +143,6 @@ public class SaldoFragment extends Fragment {
         danasnjiSaldo = (TextView) view.findViewById(R.id.danasnjiSaldo);
         odjaviMe = (Button) view.findViewById(R.id.odjaviMeButton);
         potrosnjaLV = (ListView) view.findViewById(R.id.potrosnjaLV);
-        if(potrosnjaLV != null){
-            arrayAdapter = new MeniAdapter(getActivity(), R.layout.row_meni_layout, new ArrayList<String>());
-            potrosnjaLV.setAdapter(arrayAdapter);
-
-        }
 
         Typeface fontFamily = Typeface.createFromAsset(getActivity().getResources().getAssets(), "fontawesome.ttf");
         iconFa.setTypeface(fontFamily);
@@ -228,8 +222,10 @@ public class SaldoFragment extends Fragment {
             korisnik.setText(imePrezime);
             danasnjiSaldo.setText("Današnji saldo: " + dSaldo);
             trenutniSaldo.setText("Saldo: " + mjSaldo);
-            for(String s: lista){
-                arrayAdapter.add(s);
+
+            if(potrosnjaLV != null){
+                arrayAdapter = new MeniAdapter(getActivity(), R.layout.row_meni_layout, lista);
+                potrosnjaLV.setAdapter(arrayAdapter);
             }
         }
     }
