@@ -1,41 +1,38 @@
 package hr.fer.azzi.menze;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
-
-import hr.fer.azzi.menze.classes.DateSaldo;
-import hr.fer.azzi.menze.classes.Korisnik;
-import hr.fer.azzi.menze.classes.dao.DateSaldoDao;
-import hr.fer.azzi.menze.classes.dao.KorisnikDao;
 
 
 /**
@@ -44,203 +41,197 @@ import hr.fer.azzi.menze.classes.dao.KorisnikDao;
 public class SaldoFragment extends Fragment {
 
     View view;
-    Button provjeriButton;
-    EditText upis;
-    TextView prikazIznosa;
-    TextView brojKartice;
-    CheckBox zapamtiMe;
-    Button zaboraviMe;
     TextView iconFa;
-    KorisnikDao korisnikDao;
-    LinearLayout layout;
+    Button prijavaButton;
+    EditText email;
+    EditText lozinka;
 
-    DateSaldoDao dateSaldoDao;
-    AlarmManager alarmManager;
-    PendingIntent alarmIntent;
+    ImageView slika;
+    TextView korisnik;
+    TextView trenutniSaldo;
+    TextView danasnjiSaldo;
+    ListView potrosnjaLV;
+    Button odjaviMe;
+    MeniAdapter arrayAdapter;
 
-    private GraphicalView mChart;
-    private XYMultipleSeriesDataset mDataset = new XYMultipleSeriesDataset();
-    private XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
-    private XYSeries mCurrentSeries;
-    private XYSeriesRenderer mCurrentRenderer;
+    String username;
+    String password;
 
+
+    private SharedPreferences settings;
+
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    boolean nesto = false;
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_provjera_salda_main, container, false);
-        setViews();
-        setVisibility(false);
-        upis.setText("601983");
-
-
-        Typeface fontFamily = Typeface.createFromAsset(container.getResources().getAssets(), "fontawesome.ttf");
-        iconFa.setTypeface(fontFamily);
-        iconFa.setText("\uf0c9 ");
-
-        korisnikDao = new KorisnikDao(container.getContext());
-        dateSaldoDao = new DateSaldoDao(container.getContext());
-
-        final Korisnik korisnk = korisnikDao.get(1l);
-
-        if(korisnk != null && korisnk.getId_x() != 0){
-            prikazIznosa.setText(String.valueOf(korisnk.getSaldo()));
-            setVisibility(true);
-
-            if(mChart == null){
-                initChart();
-                addSampleData(dateSaldoDao.listAll());
-                mChart = ChartFactory.getCubeLineChartView(getActivity(), mDataset, mRenderer, 0.3f);
-                layout.addView(mChart);
-            }else{
-                mChart = ChartFactory.getCubeLineChartView(getActivity(), mDataset, mRenderer, 0.3f);
-                layout.addView(mChart);
-            }
-
+        settings = getActivity().getSharedPreferences("postavke",0);
+        username = settings.getString("username", "");
+        password = settings.getString("password", "");
+        nesto = settings.getBoolean("logged", false);
+        if(nesto){
+            view = inflater.inflate(R.layout.fragment_xica_prikaz, container, false);
+        }else{
+            view = inflater.inflate(R.layout.fragment_xica_login, container, false);
         }
 
-        setClickListeners();
-
+        setViews();
+        setClickListeners(nesto);
         return view;
     }
 
 
-    private void setClickListeners() {
 
-        provjeriButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new SaldoCheck().execute(upis.getText().toString());
-            }
-        });
-
-        zaboraviMe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                korisnikDao.delete(1L);
-                setVisibility(false);
-                if(dateSaldoDao != null)
-                    dateSaldoDao.deleteAll();
-                if(alarmManager != null) {
-                    alarmManager.cancel(alarmIntent);
-                }
-                mCurrentSeries.clear();
-            }
-        });
+    private void setClickListeners(boolean isLogged) {
         iconFa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity) SaldoFragment.this.getActivity()).showMenu();
             }
         });
+
+        if(isLogged){
+
+            new GetXica().execute();
+
+            odjaviMe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    reCreate(false);
+                }
+            });
+        } else{
+
+            if(username != null && password != null){
+                email.setText(username);
+                lozinka.setText(password);
+            }
+            prijavaButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(email.getText().toString().matches(EMAIL_PATTERN) && lozinka.getText().toString().length() > 3){
+                        nesto = true;
+                        username = email.getText().toString();
+                        password = lozinka.getText().toString();
+                        reCreate(true);
+                    }
+                }
+            });
+        }
     }
 
+    private void reCreate(boolean logged) {
+        SharedPreferences.Editor localEditor = settings.edit();
+        localEditor.putString("username", username);
+        localEditor.putString("password", password);
+        localEditor.putBoolean("logged", logged);
+        localEditor.apply();
 
+        ((MainActivity) this.getActivity()).mjestoPageAdapter.notifyDataSetChanged();
+
+    }
 
     public void setViews() {
-        provjeriButton = (Button) view.findViewById(R.id.provjeriButton);
-        upis = (EditText) view.findViewById(R.id.editText);
-        prikazIznosa = (TextView) view.findViewById(R.id.prikazIznosa);
-        brojKartice = (TextView) view.findViewById(R.id.broj_kartice_tv);
-        zapamtiMe = (CheckBox) view.findViewById(R.id.zapamtime_cb);
-        zaboraviMe = (Button) view.findViewById(R.id.zaboraviMe);
+        prijavaButton = (Button) view.findViewById(R.id.prijavaButton);
+        email = (EditText) view.findViewById(R.id.etUserName);
+        lozinka = (EditText) view.findViewById(R.id.etPass);
         iconFa = (TextView) view.findViewById(R.id.icon_fa);
-        layout = (LinearLayout) view.findViewById(R.id.chart);
-
-        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        Intent alertIntent = new Intent(getActivity(), SaldoReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, alertIntent, 0);
-    }
-
-    private void  setVisibility(boolean loggedIn){
-        if(loggedIn){
-            provjeriButton.setVisibility(View.GONE);
-            upis.setVisibility(View.GONE);
-            brojKartice.setVisibility(View.GONE);
-            zapamtiMe.setVisibility(View.GONE);
-            prikazIznosa.setVisibility(View.VISIBLE);
-            zaboraviMe.setVisibility(View.VISIBLE);
-            layout.setVisibility(View.VISIBLE);
-        }else{
-            brojKartice.setVisibility(View.VISIBLE);
-            zapamtiMe.setVisibility(View.VISIBLE);
-            provjeriButton.setVisibility(View.VISIBLE);
-            upis.setVisibility(View.VISIBLE);
-            prikazIznosa.setVisibility(View.INVISIBLE);
-            zaboraviMe.setVisibility(View.INVISIBLE);
-            layout.setVisibility(View.GONE);
-
+        slika = (ImageView) view.findViewById(R.id.slika);
+        korisnik = (TextView) view.findViewById(R.id.imePrezime);
+        trenutniSaldo = (TextView) view.findViewById(R.id.trenutniSaldo);
+        danasnjiSaldo = (TextView) view.findViewById(R.id.danasnjiSaldo);
+        odjaviMe = (Button) view.findViewById(R.id.odjaviMeButton);
+        potrosnjaLV = (ListView) view.findViewById(R.id.potrosnjaLV);
+        if(potrosnjaLV != null){
+            arrayAdapter = new MeniAdapter(getActivity(), R.layout.row_meni_layout, new ArrayList<String>());
+            potrosnjaLV.setAdapter(arrayAdapter);
 
         }
 
-   }
-
-
-    private void addSampleData(List<DateSaldo> mapaPotrosnje) {
-        int i = 0;
-        SimpleDateFormat sdf = new SimpleDateFormat("E dd.MM.yyyy");
-        for(DateSaldo dateSaldo : mapaPotrosnje){
-            i++;
-            mCurrentSeries.add(i, dateSaldo.getSaldo());
-            mCurrentSeries.addAnnotation(sdf.format(dateSaldo.getDate()), i, dateSaldo.getSaldo());
-        }
-
+        Typeface fontFamily = Typeface.createFromAsset(getActivity().getResources().getAssets(), "fontawesome.ttf");
+        iconFa.setTypeface(fontFamily);
+        iconFa.setText("\uf0c9 ");
     }
 
-    private void initChart() {
-        mCurrentSeries = new XYSeries("Graf potrosnje");
-        mDataset.addSeries(mCurrentSeries);
-        mCurrentRenderer = new XYSeriesRenderer();
-        mRenderer.addSeriesRenderer(mCurrentRenderer);
-        mRenderer.setApplyBackgroundColor(true);
-        mRenderer.setBackgroundColor(Color.WHITE);
-        mRenderer.setMarginsColor(Color.argb(96,228,241,254));
-    }
 
-    public void setAlarm() {
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,AlarmManager.INTERVAL_DAY,
-                AlarmManager.INTERVAL_DAY, alarmIntent);
-    }
-
-    private class SaldoCheck extends AsyncTask<String, Void, String> {
+    class GetXica extends AsyncTask<String, Void, String>
+    {
+        Bitmap bmImg;
+        String imePrezime;
+        String dSaldo;
+        String mjSaldo;
+        List<String> lista;
         @Override
-        protected String doInBackground(String... strings) {
-            Document doc;
-            try {
-                Log.d("poruka",strings[0]);
-                doc = Jsoup.connect("http://www.cap.srce.hr/saldo.aspx?brk=" + strings[0]).timeout(0).get();
-            } catch (IOException e) {
-                return null;
+        protected String doInBackground(String... paramVarArgs)
+        {
+            lista = new ArrayList<>();
+            DefaultHttpClient localDefaultHttpClient = new DefaultHttpClient();
+            HttpPost localHttpPost = new HttpPost("http://sokac.net/xica/xica.php");
+            try
+            {
+                ArrayList localArrayList = new ArrayList(2);
+                localArrayList.add(new BasicNameValuePair("username", username));
+                localArrayList.add(new BasicNameValuePair("password", password));
+                localHttpPost.setEntity(new UrlEncodedFormEntity(localArrayList));
+                String res = EntityUtils.toString(localDefaultHttpClient.execute(localHttpPost).getEntity());
+
+                JSONTokener localJSONTokener = new JSONTokener(res);
+                try {
+                    JSONObject localJSONObject = (JSONObject)localJSONTokener.nextValue();
+                    imePrezime = localJSONObject.getString("korisnik");
+                    double d3 = localJSONObject.getDouble("stanje");
+                    double d4 = localJSONObject.getDouble("ostalo");
+                    dSaldo = String.valueOf(d4);
+                    mjSaldo = String.valueOf(d3);
+
+                    String slikaString =  "http://www.cap.srce.hr" + localJSONObject.getString("slika");
+                    HttpURLConnection localHttpURLConnection = (HttpURLConnection) new URL(slikaString).openConnection();
+                    localHttpURLConnection.setDoInput(true);
+                    localHttpURLConnection.connect();
+                    InputStream localInputStream = localHttpURLConnection.getInputStream();
+                    this.bmImg = BitmapFactory.decodeStream(localInputStream);
+                    localInputStream.close();
+
+                    JSONArray localJSONArray = localJSONObject.getJSONArray("racuni");
+
+                    for (int i = localJSONArray.length(); i > 0; i--){
+                        String imeRestorana = localJSONArray.getJSONObject(i - 1).getString("restoran");
+                        String vrijeme = localJSONArray.getJSONObject(i - 1).getString("vrijeme");
+                        String iznos = localJSONArray.getJSONObject(i - 1).getString("iznos") + "kn";
+                        lista.add(imeRestorana + "\t" + vrijeme + "\t" + iznos);
+                    }
+                } catch (Exception e){
+                }
             }
-            String docText = doc.text();
-            String beg = "Preostali saldo:";
-            return docText.substring(docText.indexOf(beg) + beg.length(),
-                    docText.indexOf("Status kartice:")).trim().replace(',','.');
+            catch (IOException localIOException)
+            {
+                localIOException.printStackTrace();
+            }
+            return "net";
         }
+
 
         @Override
         protected void onPostExecute(String res) {
-            if(res == null){
-                prikazIznosa.setText("Poteškoće s konekcijom");
-                prikazIznosa.setVisibility(View.VISIBLE);
+            if(slika == null || korisnik == null || danasnjiSaldo == null || trenutniSaldo == null){
                 return;
             }
+            if (bmImg != null)
+                slika.setImageBitmap(bmImg);
 
-            if(res.isEmpty()){
-                prikazIznosa.setText("Krivi broj kartice");
-                prikazIznosa.setVisibility(View.VISIBLE);
+            if(imePrezime == null || danasnjiSaldo == null || trenutniSaldo == null){
+                reCreate(false);
                 return;
             }
-            if(zapamtiMe.isChecked()){
-                Korisnik korisnik = new Korisnik();
-                korisnik.setId(1l);
-                korisnik.setId_x(Long.parseLong(upis.getText().toString()));
-                korisnik.setSaldo(Double.parseDouble(res));
-                korisnikDao.insert(korisnik);
-                setAlarm();
+            korisnik.setText(imePrezime);
+            danasnjiSaldo.setText("Današnji saldo: " + dSaldo);
+            trenutniSaldo.setText("Saldo: " + mjSaldo);
+            for(String s: lista){
+                arrayAdapter.add(s);
             }
-
-            prikazIznosa.setText(res);
-            setVisibility(true);
-
         }
     }
+
 }

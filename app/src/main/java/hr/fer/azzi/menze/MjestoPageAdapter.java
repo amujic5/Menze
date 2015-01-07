@@ -36,6 +36,11 @@ public class MjestoPageAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public int getItemPosition(Object object) {
+        return  POSITION_NONE;
+    }
+
+    @Override
     public int getCount() {
         return mjesta.length + 1;
     }

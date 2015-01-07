@@ -17,16 +17,16 @@ import hr.fer.azzi.menze.classes.Menza;
 /**
  * Created by Azzaro on 27.10.2014..
  */
-public class MenzeAdapter extends ArrayAdapter<Menza> {
+public class MeniAdapter extends ArrayAdapter<String> {
 
     private Context context;
-    private List<Menza> menze;
+    private List<String> lista;
     private int resID;
 
-    public MenzeAdapter(Context context, int resID, List<Menza> menze) {
-        super(context, resID, menze);
+    public MeniAdapter(Context context, int resID, List<String> lista) {
+        super(context, resID, lista);
         this.context = context;
-        this.menze = menze;
+        this.lista = lista;
         this.resID = resID;
 
     }
@@ -36,14 +36,15 @@ public class MenzeAdapter extends ArrayAdapter<Menza> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(resID, parent, false);
 
-        Menza menza = menze.get(position);
+        String[] strings = lista.get(position).split("\t");
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.menza_image);
-        if(menza.getIdSlike() != 0)
-            imageView.setImageResource(menza.getIdSlike());
+        TextView imeRestorana = (TextView) view.findViewById(R.id.restoran);
+        TextView datum = (TextView) view.findViewById(R.id.datum);
+        TextView cijena = (TextView) view.findViewById(R.id.cijena);
 
-        TextView textView = (TextView) view.findViewById(R.id.nazivMenze);
-        textView.setText(menza.getNaziv());
+        imeRestorana.setText(strings[0]);
+        datum.setText(strings[1]);
+        cijena.setText(strings[2]);
 
         return view;
     }
