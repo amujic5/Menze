@@ -68,13 +68,10 @@ public class MjestoFragment extends Fragment {
             Menza menza = new Menza();
             menza.setNaziv(atributiMenze[0]);
             menza.setIdSlike(resources.getIdentifier(atributiMenze[1] , "drawable", view.getContext().getPackageName()));
-
-            if(atributiMenze.length > 2){
-                menza.setIdOpis(resources.getIdentifier(atributiMenze[2] , "array", view.getContext().getPackageName()));
-            }
-            if(atributiMenze.length == 4){
-                menza.setLink(atributiMenze[3]);
-            }
+            menza.setIdOpis(resources.getIdentifier(atributiMenze[2] , "array", view.getContext().getPackageName()));
+            menza.setLink(atributiMenze[3]);
+            Log.d("test", atributiMenze[0]);
+            menza.setUlica(atributiMenze[4]);
 
             menzeList.add(menza);
         }

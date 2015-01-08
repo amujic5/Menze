@@ -13,9 +13,17 @@ public class Menza implements Serializable{
 
     private String naziv;
     private String link;
+    private String ulica;
     private int idSlike;
     private int idOpis;
 
+    public String getUlica() {
+        return ulica;
+    }
+
+    public void setUlica(String ulica) {
+        this.ulica = ulica;
+    }
 
     public String getLink() {
         return link;

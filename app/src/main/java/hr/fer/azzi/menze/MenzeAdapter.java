@@ -45,6 +45,9 @@ public class MenzeAdapter extends ArrayAdapter<Menza> {
         TextView textView = (TextView) view.findViewById(R.id.nazivMenze);
         textView.setText(menza.getNaziv());
 
+        TextView ulicaTv = (TextView) view.findViewById(R.id.ulica);
+        ulicaTv.setText(menza.getUlica());
+
         return view;
     }
 }

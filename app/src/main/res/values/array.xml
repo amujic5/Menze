@@ -6,45 +6,45 @@
         <item>Rijeka</item>
     </string-array>
 
-    <!--ime <tab> imeSlike <tab> opis <tab> link-->
+    <!--ime <tab> imeSlike <tab> opis-radnovrijeme <tab> link <tab> ulica-->
     <string-array name="menzeZagreb">
-        <item>Fer Cassandra\tfer\tcassandra_html\thttp://www.cassandra.hr/menu/studentski-menu/</item>
-        <item>Savska\tsc_savska\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/savska/</item>
-        <item>SD S.Radić\tstjepanradic\ts_radic_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-s-radic/</item>
-        <item>SD Cvjetno Naselje\tcvjetno\tcvjetno_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-cvjetno-naselje/</item>
-        <item>SD Lašćina\tlascina\tlascina_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-lascina/</item>
-        <item>ZUK Borongaj\tborongaj\tborongaj_html\thttp://www.sczg.unizg.hr/prehrana/restorani/zuk-borongaj/</item>
-        <item>Ekonomija\tekonomija\tekonomija_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/ekonomija/</item>
-        <item>Medicina\tmedicina\tmedicina_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/medicina/</item>
-        <item>Veterina\tveterina\tveterina_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/veterina/</item>
-        <item>Šumarstvo\tsumarstvo\tsumarstvo_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sumarstvo/</item>
-        <item>FSB\tfsb\tfsb_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/fsb/</item>
-        <item>ALU\talu\talu_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/alu/</item>
-        <item>Blagavaona TTF\tttf\tttf_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/blagovaona-ttf/</item>
+        <item>Fer Cassandra\tfer\tcassandra_html\thttp://www.cassandra.hr/menu/studentski-menu/\tUnska 3</item>
+        <item>Savska\tsc_savska\tsc_savska_html\thttp://www.sczg.unizg.hr/prehrana/restorani/savska/\tSavska 25</item>
+        <item>SD S.Radić\tstjepanradic\ts_radic_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-s-radic/\tJarunska 2</item>
+        <item>SD Cvjetno Naselje\tcvjetno\tcvjetno_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-cvjetno-naselje/\tOdranska 8</item>
+        <item>SD Lašćina\tlascina\tlascina_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sd-lascina/\tLašćinska cesta 32</item>
+        <item>ZUK Borongaj\tborongaj\tborongaj_html\thttp://www.sczg.unizg.hr/prehrana/restorani/zuk-borongaj/\tBorongajska bb</item>
+        <item>Ekonomija\tekonomija\tekonomija_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/ekonomija/\tKennedyev trg 7</item>
+        <item>Medicina\tmedicina\tmedicina_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/medicina/\tŠalata 3b</item>
+        <item>Veterina\tveterina\tveterina_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/veterina/\tHeinzelova 55</item>
+        <item>Šumarstvo\tsumarstvo\tsumarstvo_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/sumarstvo/\tSvetošimunska 25</item>
+        <item>FSB\tfsb\tfsb_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/fsb/\tIvana Lučića 5</item>
+        <item>ALU\talu\talu_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/alu/\tIlica 85c</item>
+        <item>Blagavaona TTF\tttf\tttf_zg_html\thttp://www.sczg.unizg.hr/prehrana/restorani/blagovaona-ttf/\tPrilaz baruna Filipovića 28a</item>
     </string-array>
 
     <string-array name="menzeSplit">
-        <item>SD HOSTEL SPINUT\tst_spinut\thotel_spinut_html</item>
-        <item>SD Bruno Bušić\tst_brunobusic\tbruno_basic_html</item>
-        <item>FGAG\tst_gradjevina\tgaa_html</item>
-        <item>Ekonomija\tst_ekonomija\tekonomija_html</item>
-        <item>FESB 2\tst_fesb\tfesb_html</item>
-        <item>Medicina\tst_medicina\tmedicina_html</item>
-        <item>PMF\tst_pmf\tpmf_html</item>
-        <item>Pravo\tst_pravo\tpravo_html</item>
-        <item>Filozofski\tst_filozofija\tfilozofija_html</item>
-        <item>Snack bar\tst_knjiznica\tsnack_html</item>
+        <item>SD HOSTEL SPINUT\tst_spinut\thotel_spinut_html\tnull\tSpinutska 39</item>
+        <item>SD Bruno Bušić\tst_brunobusic\tbruno_basic_html\tnull\tSpinutska 37</item>
+        <item>FGAG\tst_gradjevina\tgaa_html\tnull\tul. Matice hrvatske 15</item>
+        <item>Ekonomija\tst_ekonomija\tekonomija_html\tnull\tCvite Fiskovića 5</item>
+        <item>FESB 2\tst_fesb\tfesb_html\tnull\tul. Nikole Tesle 2</item>
+        <item>Medicina\tst_medicina\tmedicina_html\tnull\tŠoltanska 2</item>
+        <item>PMF\tst_pmf\tpmf_html\tnull\tul. Nikole Tesle 12</item>
+        <item>Pravo\tst_pravo\tpravo_html\tnull\tul. Domovinskog rata 8</item>
+        <item>Filozofski\tst_filozofija\tfilozofija_html\tnull\tSinjska 2</item>
+        <item>Snack bar\tst_knjiznica\tsnack_html\tnull\tul. Ruđera Boškovića 31</item>
     </string-array>
 
     <string-array name="menzeRijeka">
-        <item>Indeks\tri_index\tindex_html</item>
-        <item>Mini\tri_mini\tmini_html</item>
-        <item>Caffe bar Medicinar\tri_medicina\tmedicinar_html</item>
-        <item>Kampus\tri_kampus\tkampus_html</item>
-        <item>Caffe bar Reful\tri_reful\treful_html</item>
-        <item>Caffe bar Andrea\tri_andrea\tandrea_html</item>
-        <item>Caffe bar Formula\tri_formula\tformula_html</item>
-        <item>Bistro Mul\tri_ika\tmul_html</item>
+        <item>Indeks\tri_index\tindex_html\tnull\tKrešimirova 18</item>
+        <item>Mini\tri_mini\tmini_html\tnull\tČandekova 4</item>
+        <item>Caffe bar Medicinar\tri_medicina\tmedicinar_html\tnull\tul. Braće Branchetta 20</item>
+        <item>Kampus\tri_kampus\tkampus_html\tnull\tul. Radmila Matejčića 5</item>
+        <item>Caffe bar Reful\tri_reful\treful_html\tnull\tSveučilišna avenija 4</item>
+        <item>Caffe bar Andrea\tri_andrea\tandrea_html\tnull\tul.Radmila Matejčića 3</item>
+        <item>Caffe bar Formula\tri_formula\tformula_html\tnull\tul.Radmila Matejčića 2</item>
+        <item>Bistro Mul\tri_ika\tmul_html\tnull\tPrimorska 42</item>
     </string-array>
 
     <array name="menze">
