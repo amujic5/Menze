@@ -1,4 +1,4 @@
-package hr.fer.azzi.menze;
+package hr.fer.azzi.menze.adapters;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
- 
+
+import hr.fer.azzi.menze.R;
+
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
  
     private Context _context;

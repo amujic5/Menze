@@ -1,4 +1,4 @@
-package hr.fer.azzi.menze;
+package hr.fer.azzi.menze.activitys;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -14,12 +14,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import hr.fer.azzi.menze.R;
+import hr.fer.azzi.menze.adapters.ExpandableListAdapter;
 import hr.fer.azzi.menze.classes.Menza;
 
 /**

@@ -1,4 +1,4 @@
-package hr.fer.azzi.menze;
+package hr.fer.azzi.menze.adapters;
 
 import android.app.Activity;
 import android.content.Context;

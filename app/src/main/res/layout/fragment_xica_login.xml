@@ -7,17 +7,19 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#52B3D9"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp">
+        android:background="@drawable/gradient_title"
+        android:layout_marginBottom="2dp"
+        android:padding="2dp">>
 
         <TextView
+
             android:id="@+id/icon_fa"
             android:text="T"
             android:textColor="#FFFFFF"
-            android:paddingTop="2dp"
+            android:layout_centerVertical="true"
             android:padding="10dp"
             android:textSize="30sp"
             android:layout_width="wrap_content"
@@ -26,9 +28,9 @@
         <TextView
             android:text="Stanje Xice"
             android:textSize="30sp"
+            android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="#FFFFFF"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -79,7 +81,36 @@
             />
     </LinearLayout>
 
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:padding="10dp">
 
+    <EditText
+        android:id="@+id/unosXice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:background="@drawable/edittext_top_bg"
+        android:padding="10dp"
+        android:text="601983"
+        android:textColorHint="#cccccc"
+        android:drawableLeft="@drawable/card"
+        android:drawableStart="@drawable/card"
+        />
+    <Button
+        android:id="@+id/provjeriSaldoButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:text="Provjeri saldo"
+        style="@style/DefaultButtonText"
+        android:background="@drawable/button_default_bg"
+        />
+    </LinearLayout>
 
 
 

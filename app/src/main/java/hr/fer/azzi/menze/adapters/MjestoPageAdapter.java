@@ -1,4 +1,4 @@
-package hr.fer.azzi.menze;
+package hr.fer.azzi.menze.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
+
+import hr.fer.azzi.menze.R;
+import hr.fer.azzi.menze.fragments.MjestoFragment;
+import hr.fer.azzi.menze.fragments.SaldoFragment;
 
 /**
  * Created by Azzaro on 17.12.2014..

@@ -1,4 +1,4 @@
-package hr.fer.azzi.menze;
+package hr.fer.azzi.menze.fragments;
 
 
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hr.fer.azzi.menze.activitys.MainActivity;
+import hr.fer.azzi.menze.activitys.MenzaDisplay;
+import hr.fer.azzi.menze.adapters.MenzeAdapter;
+import hr.fer.azzi.menze.R;
 import hr.fer.azzi.menze.classes.Menza;
 
 
@@ -67,10 +70,9 @@ public class MjestoFragment extends Fragment {
             String[] atributiMenze = nazivMenze.split("\t");
             Menza menza = new Menza();
             menza.setNaziv(atributiMenze[0]);
-            menza.setIdSlike(resources.getIdentifier(atributiMenze[1] , "drawable", view.getContext().getPackageName()));
-            menza.setIdOpis(resources.getIdentifier(atributiMenze[2] , "array", view.getContext().getPackageName()));
+            menza.setIdSlike(resources.getIdentifier(atributiMenze[1], "drawable", view.getContext().getPackageName()));
+            menza.setIdOpis(resources.getIdentifier(atributiMenze[2], "array", view.getContext().getPackageName()));
             menza.setLink(atributiMenze[3]);
-            Log.d("test", atributiMenze[0]);
             menza.setUlica(atributiMenze[4]);
 
             menzeList.add(menza);

@@ -1,21 +1,22 @@
-package hr.fer.azzi.menze;
+package hr.fer.azzi.menze.fragments;
 
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -25,13 +26,21 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import hr.fer.azzi.menze.activitys.MainActivity;
+import hr.fer.azzi.menze.adapters.MeniAdapter;
+import hr.fer.azzi.menze.R;
+import hr.fer.azzi.menze.classes.DateSaldo;
 
 
 /**
@@ -44,6 +53,8 @@ public class SaldoFragment extends Fragment {
     Button prijavaButton;
     EditText email;
     EditText lozinka;
+    EditText unosXice;
+    Button provjeriSaldo;
 
     ImageView slika;
     TextView korisnik;
@@ -107,6 +118,20 @@ public class SaldoFragment extends Fragment {
                 email.setText(username);
                 lozinka.setText(password);
             }
+
+            provjeriSaldo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String brojXString = unosXice.getText().toString();
+                    if(brojXString.length() < 19){
+                        Toast.makeText(getActivity(), "krivi broj Xice",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    new getSaldo().execute(brojXString);
+                }
+            });
+
             prijavaButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -136,6 +161,8 @@ public class SaldoFragment extends Fragment {
         prijavaButton = (Button) view.findViewById(R.id.prijavaButton);
         email = (EditText) view.findViewById(R.id.etUserName);
         lozinka = (EditText) view.findViewById(R.id.etPass);
+        unosXice = (EditText) view.findViewById(R.id.unosXice);
+        provjeriSaldo = (Button) view.findViewById(R.id.provjeriSaldoButton);
         iconFa = (TextView) view.findViewById(R.id.icon_fa);
         slika = (ImageView) view.findViewById(R.id.slika);
         korisnik = (TextView) view.findViewById(R.id.imePrezime);
@@ -149,6 +176,34 @@ public class SaldoFragment extends Fragment {
         iconFa.setText("\uf0c9 ");
     }
 
+    private class getSaldo extends AsyncTask<String, Void, String>{
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                Document doc = Jsoup.connect("http://www.cap.srce.hr/saldo.aspx?brk=" + strings[0] ).timeout(0).get();
+                String docText = doc.text();
+                String beg = "Preostali saldo:";
+
+                return docText.substring(docText.indexOf(beg) + beg.length(),
+                        docText.indexOf("Status kartice:")).trim().replace(',','.');
+            } catch (IOException e) {
+                return null;
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(String res) {
+            if (res == null){
+                Toast.makeText(getActivity(), "krivi broj Xice",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getActivity(), "Trenutni saldo: " + res,Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
 
     class GetXica extends AsyncTask<String, Void, String>
     {

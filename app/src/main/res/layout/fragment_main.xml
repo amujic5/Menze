@@ -8,15 +8,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#52B3D9"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp">
+        android:background="@drawable/gradient_title"
+        android:layout_marginBottom="2dp"
+        android:padding="2dp">
 
         <TextView
+
             android:id="@+id/icon_fa"
             android:text="T"
             android:textColor="#FFFFFF"
-            android:paddingTop="2dp"
+            android:layout_centerVertical="true"
             android:padding="10dp"
             android:textSize="30sp"
             android:layout_width="wrap_content"
@@ -26,11 +27,11 @@
             android:id="@+id/naziv_grada"
             android:text="test"
             android:textSize="30sp"
+            android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="#FFFFFF"
-            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_prikaz_korisnika_grey">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#52B3D9"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp">
+        android:background="@drawable/gradient_title"
+        android:layout_marginBottom="2dp"
+        android:padding="2dp">>
 
         <TextView
             android:id="@+id/icon_fa"
@@ -25,7 +26,7 @@
             android:textSize="30sp"
             android:gravity="center"
             android:textColor="#FFFFFF"
-            android:padding="10dp"
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -35,7 +36,6 @@
         android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#5052B3D9"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/slika"
@@ -96,7 +96,7 @@
 
         <Button
             android:id="@+id/odjaviMeButton"
-            android:background="#5052B3D9"
+            android:background="@drawable/gradient_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Odjavi me"

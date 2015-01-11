@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="#52B3D9">
+    android:background="@drawable/gradient_title">
 
 
     <TextView

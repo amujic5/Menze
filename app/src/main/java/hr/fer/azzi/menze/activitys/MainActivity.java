@@ -1,30 +1,30 @@
-package hr.fer.azzi.menze;
+package hr.fer.azzi.menze.activitys;
 
 
 import android.os.Bundle;
 
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hr.fer.azzi.menze.R;
+import hr.fer.azzi.menze.adapters.MenuAdapter;
+import hr.fer.azzi.menze.adapters.MjestoPageAdapter;
+
 
 public class MainActivity extends ActionBarActivity {
 
 
-    MjestoPageAdapter mjestoPageAdapter;
+    public MjestoPageAdapter mjestoPageAdapter;
     ViewPager mViewPager;
 
 

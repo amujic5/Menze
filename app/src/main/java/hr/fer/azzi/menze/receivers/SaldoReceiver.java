@@ -1,4 +1,4 @@
-package hr.fer.azzi.menze;
+package hr.fer.azzi.menze.receivers;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -18,18 +18,17 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import hr.fer.azzi.menze.R;
 import hr.fer.azzi.menze.classes.DateSaldo;
 import hr.fer.azzi.menze.classes.Korisnik;
-import hr.fer.azzi.menze.classes.dao.DateSaldoDao;
-import hr.fer.azzi.menze.classes.dao.KorisnikDao;
+
 
 /**
  * Created by Azzaro on 1.1.2015..
  */
 public class SaldoReceiver extends BroadcastReceiver{
 
-    DateSaldoDao dateSaldoDao;
-    KorisnikDao korisnikDao;
+
     Korisnik korisnik;
     Context context;
 
@@ -38,8 +37,7 @@ public class SaldoReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("poceo reciver","poceo reciver");
-        korisnikDao = new KorisnikDao(context);
-        korisnik = korisnikDao.get(1l);
+
         this.context = context;
         if (intent != null &&
                 intent.getAction() != null &&
@@ -50,10 +48,7 @@ public class SaldoReceiver extends BroadcastReceiver{
             return;
         }
 
-        if(korisnik != null && korisnik.getId_x() != 0){
-            dateSaldoDao = new DateSaldoDao(context);
-            new getSaldo().execute();
-        }
+
     }
 
     private void setAlarm() {
@@ -94,12 +89,8 @@ public class SaldoReceiver extends BroadcastReceiver{
             DateSaldo dateSaldo = new DateSaldo();
             dateSaldo.setSaldo(saldoDobule);
             dateSaldo.setDate(new Date());
-            dateSaldoDao.insert(dateSaldo);
 
-            List<DateSaldo> listDateSaldo = dateSaldoDao.listAll();
-            if(listDateSaldo.size() > MAX_SALDO_HISTORY){
-                dateSaldoDao.delete(listDateSaldo.get(0).getId());
-            }
+
 
             if(saldoDobule < MIN_SALDO_NOTIFIC)
                 createNotification(res);
