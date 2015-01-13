@@ -9,7 +9,6 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -53,7 +52,7 @@ public class MenzaDisplay extends Activity {
         image.setImageResource(menza.getIdSlike());
         String[] poljeOpisa = getResources().getStringArray(menza.getIdOpis());
         List<String> listaOpisa = new ArrayList<>();
-        for(String redakOpisa : poljeOpisa){
+        for (String redakOpisa : poljeOpisa) {
             listaOpisa.add(redakOpisa);
         }
 
@@ -61,13 +60,13 @@ public class MenzaDisplay extends Activity {
         listDataHeader.add("Radno vrijeme");
 
         listDataChild = new HashMap<>();
-        listDataChild.put(listDataHeader.get(0),listaOpisa);
+        listDataChild.put(listDataHeader.get(0), listaOpisa);
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         description.setAdapter(listAdapter);
 
 
-        if(menza.getLink() != null){
+        if (menza.getLink() != null) {
             new HtmlGetParser().execute(menza.getLink());
         }
 
@@ -87,9 +86,9 @@ public class MenzaDisplay extends Activity {
 
 
         @Override
-        protected List<String> doInBackground(String...  strings) {
+        protected List<String> doInBackground(String... strings) {
             List<String> redovi = new ArrayList<>();
-            try{
+            try {
                 Document doc = Jsoup.connect(strings[0]).timeout(0).get();
                 String docText = doc.text();
 
@@ -100,16 +99,17 @@ public class MenzaDisplay extends Activity {
 
                 Element element = doc.getElementsByClass("newsItem").get(1).getElementsByClass("content").get(0);
 
-                for(Element elementChild : element.children()){
+                for (Element elementChild : element.children()) {
 
                     String line = elementChild.text();
-                    if(line.replaceAll("\\s+","").replaceAll("\\p{C}","").trim().length() < 2 && redovi.get(redovi.size() - 1).length() < 2) continue;
+                    if (line.replaceAll("\\s+", "").replaceAll("\\p{C}", "").trim().length() < 2 && redovi.get(redovi.size() - 1).length() < 2)
+                        continue;
 
-                    if(line.contains(":") && line.split(":").length > 1 && line.split(":")[1].length() > 15){
+                    if (line.contains(":") && line.split(":").length > 1 && line.split(":")[1].length() > 15) {
                         String[] jela = line.split(":")[1].split(",");
                         redovi.add("\t" + line.split(":")[0].trim());
-                        for(String jelo : jela){
-                            if(jelo.trim().length() < 3)
+                        for (String jelo : jela) {
+                            if (jelo.trim().length() < 3)
                                 continue;
                             redovi.add("\t\t\u2022 " + jelo.trim());
                         }
@@ -117,7 +117,7 @@ public class MenzaDisplay extends Activity {
                     }
                     redovi.add(line.trim());
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 Log.d("test", "exception" + e.toString());
             }
 
@@ -126,7 +126,7 @@ public class MenzaDisplay extends Activity {
 
         @Override
         protected void onPostExecute(List<String> lineList) {
-            if(lineList.isEmpty())
+            if (lineList.isEmpty())
                 return;
             String date = lineList.get(0);
             lineList.remove(0);

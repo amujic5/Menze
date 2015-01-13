@@ -70,8 +70,9 @@ public class MjestoFragment extends Fragment {
             String[] atributiMenze = nazivMenze.split("\t");
             Menza menza = new Menza();
             menza.setNaziv(atributiMenze[0]);
-            menza.setIdSlike(resources.getIdentifier(atributiMenze[1], "drawable", view.getContext().getPackageName()));
-            menza.setIdOpis(resources.getIdentifier(atributiMenze[2], "array", view.getContext().getPackageName()));
+            String packageName = view.getContext().getPackageName();
+            menza.setIdSlike(resources.getIdentifier(atributiMenze[1], "drawable", packageName));
+            menza.setIdOpis(resources.getIdentifier(atributiMenze[2], "array", packageName));
             menza.setLink(atributiMenze[3]);
             menza.setUlica(atributiMenze[4]);
 

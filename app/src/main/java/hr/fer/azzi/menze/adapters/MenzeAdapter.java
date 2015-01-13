@@ -21,33 +21,48 @@ import hr.fer.azzi.menze.classes.Menza;
 public class MenzeAdapter extends ArrayAdapter<Menza> {
 
     private Context context;
-    private List<Menza> menze;
     private int resID;
+
+    private static class VH {
+        ImageView image;
+        TextView name;
+        TextView street;
+    }
 
     public MenzeAdapter(Context context, int resID, List<Menza> menze) {
         super(context, resID, menze);
         this.context = context;
-        this.menze = menze;
         this.resID = resID;
 
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(resID, parent, false);
+        final View view;
+        if(convertView != null) {
+            view = convertView;
+        } else {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(resID, parent, false);
 
-        Menza menza = menze.get(position);
+            final VH viewHolder = new VH();
+            viewHolder.image = (ImageView) view.findViewById(R.id.menza_image);
+            viewHolder.name = (TextView) view.findViewById(R.id.nazivMenze);
+            viewHolder.street = (TextView) view.findViewById(R.id.ulica);
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.menza_image);
+            view.setTag(viewHolder);
+        }
+
+        final VH viewHolder = (VH) view.getTag();
+
+        Menza menza = getItem(position);
+
         if(menza.getIdSlike() != 0)
-            imageView.setImageResource(menza.getIdSlike());
+            viewHolder.image.setImageResource(menza.getIdSlike());
 
-        TextView textView = (TextView) view.findViewById(R.id.nazivMenze);
-        textView.setText(menza.getNaziv());
+        viewHolder.name.setText(menza.getNaziv());
 
-        TextView ulicaTv = (TextView) view.findViewById(R.id.ulica);
-        ulicaTv.setText(menza.getUlica());
+        viewHolder.street.setText(menza.getUlica());
 
         return view;
     }

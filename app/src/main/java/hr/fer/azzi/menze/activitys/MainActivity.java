@@ -2,12 +2,9 @@ package hr.fer.azzi.menze.activitys;
 
 
 import android.os.Bundle;
-
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-
-
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +30,6 @@ public class MainActivity extends ActionBarActivity {
     MenuAdapter adapter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
         menu.add("Stanje X-ice");
         menu.add("Zagreb");
         menu.add("Split");
-        menu.add("Rijeka");
+
 
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer);
@@ -72,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    public void showMenu(){
+    public void showMenu() {
         dLayout.openDrawer(Gravity.LEFT);
     }
 }
