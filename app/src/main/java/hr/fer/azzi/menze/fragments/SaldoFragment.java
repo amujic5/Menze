@@ -1,5 +1,6 @@
 package hr.fer.azzi.menze.fragments;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -55,6 +56,7 @@ public class SaldoFragment extends Fragment {
     EditText lozinka;
     EditText unosXice;
     Button provjeriSaldo;
+    View headerView;
 
     ImageView slika;
     TextView korisnik;
@@ -158,22 +160,26 @@ public class SaldoFragment extends Fragment {
     }
 
     public void setViews() {
+        headerView = getActivity().getLayoutInflater().inflate(R.layout.xica_header, null);
         prijavaButton = (Button) view.findViewById(R.id.prijavaButton);
         email = (EditText) view.findViewById(R.id.etUserName);
         lozinka = (EditText) view.findViewById(R.id.etPass);
         unosXice = (EditText) view.findViewById(R.id.unosXice);
         provjeriSaldo = (Button) view.findViewById(R.id.provjeriSaldoButton);
         iconFa = (TextView) view.findViewById(R.id.icon_fa);
-        slika = (ImageView) view.findViewById(R.id.slika);
-        korisnik = (TextView) view.findViewById(R.id.imePrezime);
-        trenutniSaldo = (TextView) view.findViewById(R.id.trenutniSaldo);
-        danasnjiSaldo = (TextView) view.findViewById(R.id.danasnjiSaldo);
+        slika = (ImageView) headerView.findViewById(R.id.slika);
+        korisnik = (TextView) headerView.findViewById(R.id.imePrezime);
+        trenutniSaldo = (TextView) headerView.findViewById(R.id.trenutniSaldo);
+        danasnjiSaldo = (TextView) headerView.findViewById(R.id.danasnjiSaldo);
         odjaviMe = (Button) view.findViewById(R.id.odjaviMeButton);
         potrosnjaLV = (ListView) view.findViewById(R.id.potrosnjaLV);
+        potrosnjaLV.addHeaderView(headerView);
 
         Typeface fontFamily = Typeface.createFromAsset(getActivity().getResources().getAssets(), "fontawesome.ttf");
         iconFa.setTypeface(fontFamily);
         iconFa.setText("\uf0c9 ");
+
+
     }
 
     private class getSaldo extends AsyncTask<String, Void, String>{
@@ -282,6 +288,8 @@ public class SaldoFragment extends Fragment {
                 arrayAdapter = new MeniAdapter(getActivity(), R.layout.row_meni_layout, lista);
                 potrosnjaLV.setAdapter(arrayAdapter);
             }
+
+
         }
     }
 
