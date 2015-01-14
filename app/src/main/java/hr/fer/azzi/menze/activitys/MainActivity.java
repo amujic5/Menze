@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import hr.fer.azzi.menze.adapters.MjestoPageAdapter;
 
 
 public class MainActivity extends ActionBarActivity {
-
 
     public MjestoPageAdapter mjestoPageAdapter;
     ViewPager mViewPager;
@@ -56,6 +56,7 @@ public class MainActivity extends ActionBarActivity {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mjestoPageAdapter);
         mViewPager.setCurrentItem(1);
+
 
         dList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,6 +35,7 @@ public class MenzaDisplay extends Activity {
     ExpandableListAdapter listAdapter;
     HashMap<String, List<String>> listDataChild;
     List<String> listDataHeader;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,9 @@ public class MenzaDisplay extends Activity {
         listDataChild.put(listDataHeader.get(0), listaOpisa);
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(menza.getIdSlike());
+        description.addHeaderView(imageView);
         description.setAdapter(listAdapter);
 
 

@@ -173,7 +173,10 @@ public class SaldoFragment extends Fragment {
         danasnjiSaldo = (TextView) headerView.findViewById(R.id.danasnjiSaldo);
         odjaviMe = (Button) view.findViewById(R.id.odjaviMeButton);
         potrosnjaLV = (ListView) view.findViewById(R.id.potrosnjaLV);
-        potrosnjaLV.addHeaderView(headerView);
+        if (potrosnjaLV != null) {
+            potrosnjaLV.addHeaderView(headerView);
+        }
+
 
         Typeface fontFamily = Typeface.createFromAsset(getActivity().getResources().getAssets(), "fontawesome.ttf");
         iconFa.setTypeface(fontFamily);
@@ -202,10 +205,12 @@ public class SaldoFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String res) {
-            if (res == null){
-                Toast.makeText(getActivity(), "krivi broj Xice",Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getActivity(), "Trenutni saldo: " + res,Toast.LENGTH_LONG).show();
+            if(getActivity() != null){
+                if (res == null){
+                    Toast.makeText(getActivity(), "krivi broj Xice",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "Trenutni saldo: " + res,Toast.LENGTH_LONG).show();
+                }
             }
 
         }
@@ -284,7 +289,7 @@ public class SaldoFragment extends Fragment {
             danasnjiSaldo.setText("Današnji saldo: " + dSaldo);
             trenutniSaldo.setText("Saldo: " + mjSaldo);
 
-            if(potrosnjaLV != null){
+            if(potrosnjaLV != null && getActivity() != null){
                 arrayAdapter = new MeniAdapter(getActivity(), R.layout.row_meni_layout, lista);
                 potrosnjaLV.setAdapter(arrayAdapter);
             }
