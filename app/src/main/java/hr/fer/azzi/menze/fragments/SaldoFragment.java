@@ -1,6 +1,6 @@
 package hr.fer.azzi.menze.fragments;
 
-import android.app.Activity;
+
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +34,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import hr.fer.azzi.menze.activitys.MainActivity;
 import hr.fer.azzi.menze.adapters.MeniAdapter;
 import hr.fer.azzi.menze.R;
-import hr.fer.azzi.menze.classes.DateSaldo;
 
 
 /**
@@ -212,7 +209,6 @@ public class SaldoFragment extends Fragment {
                     Toast.makeText(getActivity(), "Trenutni saldo: " + res,Toast.LENGTH_LONG).show();
                 }
             }
-
         }
     }
 
