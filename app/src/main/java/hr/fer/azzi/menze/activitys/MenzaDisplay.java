@@ -18,7 +18,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+import hr.fer.azzi.menze.MeniTouple;
 import hr.fer.azzi.menze.R;
+import hr.fer.azzi.menze.SavskaParser;
 import hr.fer.azzi.menze.adapters.ExpandableListAdapter;
 import hr.fer.azzi.menze.classes.Menza;
 
@@ -65,14 +68,15 @@ public class MenzaDisplay extends Activity {
         listDataChild.put(listDataHeader.get(0), listaOpisa);
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        ImageView imageView = new ImageView(this);
-        imageView.setImageResource(menza.getIdSlike());
-        description.addHeaderView(imageView);
         description.setAdapter(listAdapter);
 
 
         if (menza.getLink() != null) {
-            new HtmlGetParser().execute(menza.getLink());
+            if(menza.getNaziv().equals("Savska"))
+                new HtmlGetSavskaParser().execute(menza.getLink());
+            else
+                new HtmlGetParser().execute(menza.getLink());
+
         }
 
     }
@@ -85,6 +89,43 @@ public class MenzaDisplay extends Activity {
         title = (TextView) findViewById(R.id.title);
         image = (ImageView) findViewById(R.id.image);
         description = (ExpandableListView) findViewById(R.id.description);
+    }
+
+    private class HtmlGetSavskaParser extends AsyncTask<String, Void, Element>{
+
+        private String resDate;
+        @Override
+        protected Element doInBackground(String... strings) {
+            Element element = null;
+            try {
+                Document doc = Jsoup.connect(strings[0]).timeout(0).get();
+
+                String docText = doc.text();
+                String beg = "Zadnja izmjena: ";
+                 resDate = docText.substring(docText.indexOf(beg, docText.indexOf(beg) + beg.length()) + beg.length(),
+                        docText.indexOf("View")).trim();
+
+                element = doc.getElementsByClass("newsItem").get(1).getElementsByClass("content").get(0);
+
+
+            } catch (Exception e) {
+                Log.d("test", "exception" + e.toString());
+            }
+
+            return element;
+        }
+
+        @Override
+        protected void onPostExecute(Element element) {
+            if (element == null)
+                return;
+            List<MeniTouple> listMeniTouple = SavskaParser.parseSavska(element);
+            listAdapter.addElement(resDate, new ArrayList<String>());
+            for(MeniTouple meniTouple : listMeniTouple){
+                listAdapter.addElement(meniTouple.getTitle(), meniTouple.getFood());
+            }
+
+        }
     }
 
     private class HtmlGetParser extends AsyncTask<String, Void, List<String>> {

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
  
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,16 +83,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
             View convertView, ViewGroup parent) {
         String headerTitle = (String) getGroup(groupPosition);
-        if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.list_group, null);
-        }
+
+        LayoutInflater infalInflater = (LayoutInflater) this._context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = infalInflater.inflate(R.layout.list_group, null);
  
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+        if(headerTitle.equals("Ručak") || headerTitle.equals("Večera")){
+            convertView.setBackgroundResource(R.drawable.gradient_title);
+        }
  
         return convertView;
     }
