@@ -92,6 +92,7 @@
     <orderEntry type="library" exported="" name="achartengine-1.1.0" level="project" />
     <orderEntry type="library" exported="" name="assertj-core-1.6.1" level="project" />
     <orderEntry type="library" exported="" name="jsoup-1.8.1" level="project" />
+    <orderEntry type="library" exported="" name="1_jsoup-1.8.1" level="project" />
     <orderEntry type="library" exported="" name="log4j-1.2.17" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.2" level="project" />
   </component>

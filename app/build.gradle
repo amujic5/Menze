@@ -40,4 +40,5 @@ dependencies {
     compile files('C:/Users/Azzaro/Desktop/workspace/AndroidStudioProjects/Menze/.idea/libraries/jsoup-1.8.1.jar')
     compile files('libs/achartengine-1.1.0.jar')
     compile 'com.squareup.assertj:assertj-android:1.0.0'
+    compile files('libs/jsoup-1.8.1.jar')
 }
